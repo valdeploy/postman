@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "636b279a-611d-4b49-a24e-60caa1de1dec",
+		"name": "ASI Babou",
+		"description": "# Encore API Gateway<br/>[Home Page](/babou)<br/>\r\nRefer to swagger pages for connected services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "diagnostics",
+					"item": [
+						{
+							"name": "/api/diagnostics/health",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful GET request\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/diagnostics/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"diagnostics",
+										"health"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/diagnostics/health",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"diagnostics",
+												"health"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/diagnostics/metrics",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful GET request\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 2000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+											"});\r",
+											"pm.test(\"Content-Type is present\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/diagnostics/metrics",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"diagnostics",
+										"metrics"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/diagnostics/metrics",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"diagnostics",
+												"metrics"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/api/account/me",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/account/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/account/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"account",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const postRequest = {",
+					"  url: 'https://api.uat-asicentral.com/login',",
+					"  method: 'POST',",
+					"  timeout: 0,",
+					"  header: {",
+					"    \"Content-Type\": \"application/json\"",
+					"  },",
+					"  body: {",
+					"    mode: 'application/json',",
+					"    raw: JSON.stringify(",
+					"        {",
+					"        \tUserName:pm.collectionVariables.get(\"user\"),",
+					"        \tPassword:pm.collectionVariables.get(\"pwd\"),",
+					"        \tKickOut:true",
+					"        })",
+					"  }",
+					"};",
+					"pm.sendRequest(postRequest, function (err, res) {",
+					"    var responseJson = res.json();",
+					"    console.log(responseJson);",
+					"    pm.collectionVariables.set('bearerToken', responseJson['AccessToken']);",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://asiservice.uat-asicentral.com/babou/api/",
+			"type": "default"
+		},
+		{
+			"key": "Name",
+			"value": ""
+		},
+		{
+			"key": "GroupCode",
+			"value": ""
+		},
+		{
+			"key": "productId",
+			"value": ""
+		},
+		{
+			"key": "productName",
+			"value": ""
+		},
+		{
+			"key": "productAttributes",
+			"value": ""
+		},
+		{
+			"key": "priceGridId",
+			"value": ""
+		},
+		{
+			"key": "user",
+			"value": "minglu",
+			"type": "default"
+		},
+		{
+			"key": "bearerToken",
+			"value": ""
+		},
+		{
+			"key": "pwd",
+			"value": "1111xxxx",
+			"type": "default"
+		},
+		{
+			"key": "Id",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {
+		"disableBodyPruning": true
+	}
+}

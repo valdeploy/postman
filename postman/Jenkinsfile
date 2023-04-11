@@ -1,0 +1,42 @@
+pipeline {
+
+    agent any
+
+   stages {
+       
+   stage('Clean Workspace'){
+      steps {
+        cleanWs()
+      }
+    }
+     
+    stage('Checkout'){
+      steps {
+        checkout([$class: 'GitSCM', 
+        branches: [[name: '*/postman']], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [], 
+        submoduleCfg: [])
+
+      }
+    }  
+    
+	stage('run Test newman') {
+           steps {
+              sh 'newman run BloomApi.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
+              junit "*.xml"
+              
+              
+      publishHTML target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: '.',
+            reportFiles: 'newman_result.html',
+            reportName: 'Newman HTML Reporter'
+    ]  
+           }
+           
+    }
+   }
+}
