@@ -44,3 +44,8 @@ jobs:
           name: TestResults
           path: TestResults
         if: always()
+      - name: Send Results and Generate Allure Report
+        uses: Xotabu4/send-to-allure-server-action@1
+        if: always()
+        with:
+          allure-server-url: 'http://allureserver.com:5001/'
