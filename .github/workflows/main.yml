@@ -35,8 +35,8 @@ jobs:
       - name: Tests results Allure
         uses: actions/upload-artifact@v3
         with:
-          name: Allure
-          path: Allure
+          name: allure-results
+          path: allure-results
         if: always()
       - name: Tests results TestResults
         uses: actions/upload-artifact@v3
