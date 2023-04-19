@@ -18,7 +18,7 @@
 									"listen": "test",
 									"script": {
 										 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -98,7 +98,7 @@
 									"listen": "test",
 									"script": {
 										 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -189,7 +189,7 @@
 													"listen": "test",
 													"script": {
 														 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -327,7 +327,7 @@
 													"listen": "test",
 													"script": {
 														 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -458,7 +458,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -557,7 +557,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -658,7 +658,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -759,7 +759,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -860,7 +860,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -961,7 +961,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1062,7 +1062,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1191,7 +1191,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1297,7 +1297,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1394,7 +1394,7 @@
 											"listen": "test",
 											"script": {
 												 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1503,7 +1503,7 @@
 									"listen": "test",
 									"script": {
 										 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1588,7 +1588,7 @@
 									"listen": "test",
 									"script": {
 										 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1673,7 +1673,7 @@
 									"listen": "test",
 									"script": {
 										 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1772,7 +1772,7 @@
 							"listen": "test",
 							"script": {
 								 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1866,7 +1866,7 @@
 							"listen": "test",
 							"script": {
 								 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -1951,7 +1951,7 @@
 							"listen": "test",
 							"script": {
 								 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -2064,7 +2064,7 @@
 			"script": {
 				"type": "text/javascript",
 				 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
@@ -2099,7 +2099,7 @@
 			"script": {
 				"type": "text/javascript",
 				 "exec": [
-											"// @allure.id=QAA-171\r",
+											"// @allure.id='QAA-171'\r",
 											"// @allure.label.tag=Bloom API\r",
 											"// @allure.label.tag=api\r",
 											"// @allure.label.tag=smoke\r",
