@@ -31,7 +31,7 @@ jobs:
       - name: Run collection
         if: always()
         run: |
-          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export Allure --report-allure-collection-as-parent-suite --reporter-htmlextra-export TestResults/HtmlReport.html
+          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html
       - name: Tests results Allure
         uses: actions/upload-artifact@v3
         with:
