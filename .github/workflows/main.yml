@@ -27,11 +27,11 @@ jobs:
       - name: Make Directory for results
         run: | 
           mkdir -p TestResults
-          mkdir -p Allure
+          mkdir -p allure-results
       - name: Run collection
         if: always()
         run: |
-          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html
+          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export TestResults/HtmlReport.html
       - name: Tests results Allure
         uses: actions/upload-artifact@v3
         with:
