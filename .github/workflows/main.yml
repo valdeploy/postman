@@ -30,11 +30,11 @@ jobs:
    - name: Run collection
      if: always()
      run: |
-         newman run "BloomApi.postman_collection.json" -r htmlextra --reporter-htmlextra-export ./testResults/report_Bloom_uat.html -r allure --reporter-allure-export ./allure/
+         newman run "postman/BloomApi.postman_collection.json" -r htmlextra --reporter-htmlextra-export ./testResults/report_Bloom_uat.html -r allure --reporter-allure-export ./allure/
          
    - name: Tests results
      uses: actions/upload-artifact@v3
      with:
         name: RunReports
         path: testResults
-     if: failure()
+     if: always()
