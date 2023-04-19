@@ -27,16 +27,16 @@ jobs:
       - name: Make Directory for results
         run: | 
           mkdir -p TestResults
-          mkdir -p allure-results
+          mkdir -p Allure
       - name: Run collection
         if: always()
         run: |
-          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export TestResults/HtmlReport.html
+          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html
       - name: Tests results Allure
         uses: actions/upload-artifact@v3
         with:
-          name: allure-results
-          path: allure-results
+          name: Allure
+          path: Allure
         if: always()
       - name: Tests results TestResults
         uses: actions/upload-artifact@v3
@@ -44,8 +44,3 @@ jobs:
           name: TestResults
           path: TestResults
         if: always()
-      - name: Send Results and Generate Allure Report
-        uses: Xotabu4/send-to-allure-server-action@1
-        if: always()
-        with:
-          allure-server-url: 'http://my-allure-server.com:5001/'
