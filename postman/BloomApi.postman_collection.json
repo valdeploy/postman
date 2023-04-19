@@ -17,7 +17,11 @@
 								{
 									"listen": "test",
 									"script": {
-										"exec": [
+										 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Successful POST request\", function () {\r",
@@ -93,7 +97,11 @@
 								{
 									"listen": "test",
 									"script": {
-										"exec": [
+										 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Successful POST request\", function () {\r",
@@ -180,7 +188,11 @@
 												{
 													"listen": "test",
 													"script": {
-														"exec": [
+														 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"pm.collectionVariables.set(\"priceGridId\",  jsonData.PriceGridId);\r",
 															"\r",
@@ -314,7 +326,11 @@
 												{
 													"listen": "test",
 													"script": {
-														"exec": [
+														 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 															"var jsonData = JSON.parse(responseBody);\r",
 															"\r",
 															"pm.test(\"Successful POST request\", function () {\r",
@@ -441,7 +457,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -536,7 +556,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -633,7 +657,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -730,7 +758,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -827,7 +859,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -924,7 +960,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -1021,7 +1061,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -1146,7 +1190,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -1248,7 +1296,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -1341,7 +1393,11 @@
 										{
 											"listen": "test",
 											"script": {
-												"exec": [
+												 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 													"var jsonData = JSON.parse(responseBody);\r",
 													"\r",
 													"pm.test(\"Successful POST request\", function () {\r",
@@ -1372,7 +1428,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "[\n  {{productId}}\n  ]",
+											"raw": "[{{productId}}]",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1446,7 +1502,11 @@
 								{
 									"listen": "test",
 									"script": {
-										"exec": [
+										 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Successful POST request\", function () {\r",
@@ -1527,7 +1587,11 @@
 								{
 									"listen": "test",
 									"script": {
-										"exec": [
+										 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Successful POST request\", function () {\r",
@@ -1608,7 +1672,11 @@
 								{
 									"listen": "test",
 									"script": {
-										"exec": [
+										 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"\r",
 											"pm.test(\"Successful POST request\", function () {\r",
@@ -1703,7 +1771,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"exec": [
+								 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 									"var jsonData = JSON.parse(responseBody);\r",
 									"\r",
 									"pm.test(\"Successful POST request\", function () {\r",
@@ -1793,7 +1865,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"exec": [
+								 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 									"var jsonData = JSON.parse(responseBody);\r",
 									"\r",
 									"pm.test(\"Successful POST request\", function () {\r",
@@ -1874,7 +1950,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"exec": [
+								 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 									"var jsonData = JSON.parse(responseBody);\r",
 									"\r",
 									"pm.test(\"Successful POST request\", function () {\r",
@@ -1983,7 +2063,11 @@
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
-				"exec": [
+				 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 					"const postRequest = {",
 					"  url: 'https://api.uat-asicentral.com/login',",
 					"  method: 'POST',",
@@ -2014,7 +2098,11 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
-				"exec": [
+				 "exec": [
+											"// @allure.id=QAA-171\r",
+											"// @allure.label.tag=Bloom API\r",
+											"// @allure.label.tag=api\r",
+											"// @allure.label.tag=smoke\r",
 					""
 				]
 			}
@@ -2028,31 +2116,32 @@
 		},
 		{
 			"key": "Id",
-			"value": ""
+			"value": "50000120"
+		},
+		{
+			"key": "Types",
+			"value": "MarketSegment",
+			"type": "default"
 		},
 		{
 			"key": "Name",
-			"value": ""
+			"value": "Giving-march test 1"
 		},
 		{
 			"key": "GroupCode",
-			"value": ""
+			"value": "RESG"
 		},
 		{
 			"key": "productId",
-			"value": ""
+			"value": "7435362"
 		},
 		{
 			"key": "productName",
-			"value": ""
+			"value": "District Very Important Tee with Pocket."
 		},
 		{
 			"key": "productAttributes",
-			"value": ""
-		},
-		{
-			"key": "priceGridId",
-			"value": ""
+			"value": "793566496"
 		},
 		{
 			"key": "user",
@@ -2060,13 +2149,37 @@
 			"type": "default"
 		},
 		{
+			"key": "bearerToken",
+			"value": "eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00iLCJrZXlpZCI6IlRFTlQifQ.pnEnJwe1ZXmF1ZBTmHUw1poI1WExVamRPeoBH_K93kJ1bCC6GNgJMf3E7d_cVXGXS3IAA4o7OW2xU6iSp9OabwhBaSQYAwFq11a2yI4EkQ8QxvdAoSXjoiD6UijMLX2xRyLkSeglCpc71Mn3Xog7l4s2lPei5TuURySl3B5K8Ik.gsOBio-I7JeiYKqC.BABKU701bftd6DgcsJF1LExPyYnottYnQRKW3tRmX5x5hrSHarH3_c9Zei-ZnG28XxGAKts2kxfvJZ1iHYkDc-lNU9YpFT-zlGblgBs-ophH1SoujklHab9_weBMP8s1sA2XgrZ8CfbBW1HehBnynxfLwNV6XYorCtD_ABCz0Sn3NszRaR36XlSGPgG82LqWsOHd125RLgtDB378RI5mJUW5NNat9EFmoCbQxu4rCOT1QVWZ2j4JLJ-JKB-Zd2qCri6rnQOp1C8i3sttlLwqYBUCYN4JM6LucizYsr6SUhRwwuzh5A9USbU6QVjd4suCxlqogYwcer9oIOEfvNuoz3jEIvPHjfEJHl9SuNA7dRazA8GK2f6hWZCWZk4FFYsl7bEkxVYbx8BXTrY0nudxTqE5iTtIc1rWt919yQ11LKWaI6PbQrgYr6F9idW_a6Mb319w0LnREX90BDRwrBlNuTcduBWZqtIdXwoE6yKCdjX_uanHC5qyNZ9p-7AU2jjWSjFCB4VMd2FZxGKa5us8DwpOCIUfvnrIyWQjMem7K5LP9jF6Vyt3jZKngrP2cppN5vLj9R18o-_LIA3MTExHGsvjmSEHreTWcYaV_glbzo1wAd8WwGKhqfmCAlnUYjw_-p0foq3-TupQE7ZgG3xBfNLcNA.XGY2epgWLFEogL7krubwqQ"
+		},
+		{
 			"key": "pwd",
 			"value": "1111xxxx",
 			"type": "default"
 		},
 		{
-			"key": "bearerToken",
-			"value": ""
+			"key": "Id2",
+			"value": "5"
+		},
+		{
+			"key": "priceGridId",
+			"value": "66665865"
+		},
+		{
+			"key": "Key",
+			"value": "Currency"
+		},
+		{
+			"key": "DefaultValue",
+			"value": "USD"
+		},
+		{
+			"key": "AcceptedLevels",
+			"value": "User"
+		},
+		{
+			"key": "Description",
+			"value": "Preferred currency to use in ESP+, as a currency code e.g. USD, GBP, CAD"
 		}
 	]
 }
