@@ -25,13 +25,13 @@ jobs:
           npm install -g newman-reporter-allure
           npm install -g newman-reporter-htmlextra
       - name: Make Directory for results
-        run: mkdir -p TestResults
-      - name: Make Directory for allure
-        run: mkdir -p Allure
+        run: | 
+          mkdir -p TestResults
+          mkdir -p Allure
       - name: Run collection
         if: always()
         run: |
-          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure --reporter-allure-export Allure --reporters cli,htmlextra --reporter-htmlextra-export TestResults/HtmlReport.html
+          newman run "postman/BloomApi.postman_collection.json" --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html
       - name: Tests results Allure
         uses: actions/upload-artifact@v3
         with:
