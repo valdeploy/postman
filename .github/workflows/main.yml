@@ -48,4 +48,4 @@ jobs:
         uses: Xotabu4/send-to-allure-server-action@1
         if: always()
         with:
-          allure-server-url: 'http://allureserver.com:5001/'
+          allure-server-url: 'http://my-allure-server.com:5001/'
