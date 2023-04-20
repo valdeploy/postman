@@ -1,29 +1,33 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Ejecutar JenkinsFile Prueba local') {
+    stages {    
+        stage ('Checkout') {
             steps {
-               echo "[EXEC]Version node"
+                checkout scm
+              }
+            }          
+
+        stage('Version node') {
+            steps {
+               echo "Version node"
                bat "node -v"
             }
         }
-        stage('Instalacion') {
+        stage('Install Newman') {
             steps {
-                echo "[EXEC] instalar newman"
+                echo "install newman"
                 bat "npm install newman"
-                echo "[EXEC] instalar reporter htmlextra"
+                echo "install reporter htmlextra"
                 bat "npm install newman-reporter-htmlextra"
             }
         }
-        stage('Prueba') {
+        stage('Tests') {
             steps {
-                 echo "[EXEC] EJECUTANDO POSTMAN"
-                 bat "node newman run postman/test.postman_collection.json"
+                 echo "Run tests"
+                 bat "newman run postman/test.postman_collection.json"
 
             }
         }
-       
 
     }
 }
