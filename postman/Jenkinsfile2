@@ -1,19 +1,23 @@
 pipeline {
-    agent any
-    tools {nodejs "node"}
-    stages {
-        stage ('Checkout') {
+  agent any
+
+  tools {nodejs "node"}
+
+  stages {    
+ stage ('Checkout') {
             steps {
                 checkout scm
             }
-        }
-        stage('Build') {
-            steps {
-                nodejs(nodeJSInstallationName: 'Node 16', configId: '<config-file-provider-id>') {
-                    sh 'npm config ls'
-                }
-            }
-        }
-
-    }
+        }      
+    stage('Install dependencies') {
+      steps {
+        sh 'npm i -save express'
+      }
+    }     
+    stage('Test') {
+      steps {
+          sh 'npm config ls'
+      }
+    }             
+  }
 }
