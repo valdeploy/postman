@@ -1,20 +1,37 @@
 pipeline {
-  agent any
-    stages {     
-      stage('Clean Workspace'){
+    agent any
+    stages {
+         stage('Clean Workspace'){
         steps {
           cleanWs()
           }
       }
-      stage('Checkout'){
-        steps {
-          checkout scm
+        stage ('Checkout') {
+            steps {
+                checkout scm
+              }
+            }          
+
+        stage('Version node') {
+            steps {
+               echo "Version node"
+               bat "node -v"
+            }
         }
-      }
-      stage('run Test newman') {
-        steps {
-          sh 'newman run postman/test.postman_collection.json'
-      }
+        stage('Install Newman') {
+            steps {
+                echo "install newman"
+                sh "npm install newman"
+                echo "install reporter htmlextra"
+                sh "npm install newman-reporter-htmlextra"
+            }
+        }
+        stage('Tests') {
+            steps {
+                 echo "Run tests"
+                 sh "newman run postman/test.postman_collection.json"
+            }
+        }
+
     }
-  }
 }
