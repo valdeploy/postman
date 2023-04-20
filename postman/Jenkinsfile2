@@ -6,6 +6,13 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Build') {
+            steps {
+                nodejs(nodeJSInstallationName: 'Node 16', configId: '<config-file-provider-id>') {
+                    sh 'npm config ls'
+                }
+            }
+        }
 
     }
 }
