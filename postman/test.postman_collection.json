@@ -1,171 +1,56 @@
 {
 	"info": {
-		"_postman_id": "12a8a701-3a2f-44a9-a792-8120abf4d05b",
-		"name": "0test",
-		"description": " Description",
+		"_postman_id": "3aae33e2-d624-441b-ad7a-07f879a56f79",
+		"name": "0test2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "api",
-			"item": [
+			"name": "Fetches a resource list",
+			"event": [
 				{
-					"name": "diagnostics",
-					"item": [
-						{
-							"name": "/api/diagnostics/health",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Successful GET request\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
-											"});\r",
-											"pm.test(\"Response time is less than 2000ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
-											"});\r",
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/api/diagnostics/health",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"api",
-										"diagnostics",
-										"health"
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Success",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": "Added as a part of security scheme: bearer",
-												"key": "Authorization",
-												"value": "Bearer <token>"
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/api/diagnostics/health",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"diagnostics",
-												"health"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "/api/diagnostics/metrics",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Successful GET request\", function () {\r",
-											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);\r",
-											"});\r",
-											"pm.test(\"Response time is less than 2000ms\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
-											"});\r",
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/api/diagnostics/metrics",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"api",
-										"diagnostics",
-										"metrics"
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Success",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": "Added as a part of security scheme: bearer",
-												"key": "Authorization",
-												"value": "Bearer <token>"
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/api/diagnostics/metrics",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"api",
-												"diagnostics",
-												"metrics"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "text/plain"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						}
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"list of users fetched\")",
+							"pm.test(\"Verify Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"console.log(\"Response code is : \" + pm.response.code)",
+							"",
+							"",
+							"pm.test(\"Verify staus is OK\",()=> {",
+							"    pm.expect(\"OK\").eql(pm.response.status)",
+							"})",
+							"",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"pm.test(\"cookies is empty\", () => {",
+							"  pm.expect(pm.cookies.has('')).to.be.false;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/{{resource}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"{{resource}}"
 					]
 				}
-			]
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -191,8 +76,42 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://asiservice.uat-asicentral.com/eros",
-			"type": "string"
+			"value": "https://reqres.in"
+		},
+		{
+			"key": "username",
+			"value": "admin",
+			"type": "default"
+		},
+		{
+			"key": "myJob",
+			"value": "first",
+			"type": "default"
+		},
+		{
+			"key": "id",
+			"value": "196",
+			"type": "default"
+		},
+		{
+			"key": "resource",
+			"value": "unknown",
+			"type": "default"
+		},
+		{
+			"key": "email",
+			"value": "eve.holt@reqres.in",
+			"type": "default"
+		},
+		{
+			"key": "password",
+			"value": "pistol",
+			"type": "default"
+		},
+		{
+			"key": "token",
+			"value": "QpwL5tke4Pnpja7X4",
+			"type": "default"
 		}
 	]
 }
