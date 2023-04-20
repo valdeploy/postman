@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo "install newman"
                 bat "npm install -g newman"
-                echo "newman -v"
+                bat "newman -v"
             }
         }
 //         stage('Install htmlextra') {
@@ -47,7 +47,7 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "node newman run postman/test.postman_collection.json"
+                 bat "node newman run ./test.postman_collection.json"
             }
         }
 
