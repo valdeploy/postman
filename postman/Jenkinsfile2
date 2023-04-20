@@ -1,13 +1,11 @@
 pipeline {
   agent any
-  tools {nodejs "16.0.0"}
   stages {    
     stage ('Checkout') {
       steps {
           checkout scm
       }
     }          
-    stage('Test') {
-    }             
+           
   }
 }
