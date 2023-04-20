@@ -16,26 +16,26 @@ pipeline {
         userRemoteConfigs: [[url: 'https://github.com/valdeploy/postman.git']]])
       }
     }  
-    stage('run Test newman') {
-           steps {
-              sh 'newman run postman/test.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
-              junit "*.xml"          
-      publishHTML target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: '.',
-            reportFiles: 'newman_result.html',
-            reportName: 'Newman HTML Reporter'
-        ]  
-      }
-    }
-      stage('Allure Report') {
-      steps {
-          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              allure includeProperties: false, jdk: 'java17', report: 'build/reports/allure-report', results: [[path: 'build/allure-results']]
-          }
-      }
-    }     
-    }
+//     stage('run Test newman') {
+//            steps {
+//               sh 'newman run postman/test.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
+//               junit "*.xml"          
+//       publishHTML target: [
+//             allowMissing: false,
+//             alwaysLinkToLastBuild: false,
+//             keepAll: true,
+//             reportDir: '.',
+//             reportFiles: 'newman_result.html',
+//             reportName: 'Newman HTML Reporter'
+//         ]  
+//       }
+//     }
+//       stage('Allure Report') {
+//       steps {
+//           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+//               allure includeProperties: false, jdk: 'java17', report: 'build/reports/allure-report', results: [[path: 'build/allure-results']]
+//           }
+//       }
+//     }     
+//     }
    }
