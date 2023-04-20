@@ -26,8 +26,8 @@ pipeline {
 //         }
         stage('Install Newman') {
             steps {
-                 bat 'npm install'
-                echo "install newman"
+                bat "npm install -g npm"
+                bat "npm install node"
                 bat "npm install newman"
                 bat "newman -v"
             }
