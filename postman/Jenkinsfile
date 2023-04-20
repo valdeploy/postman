@@ -8,15 +8,9 @@ pipeline {
     }
     stage('Checkout'){
       steps {
-        checkout([$class: 'GitSCM', 
-        branches: [[name: '*/main']], 
-        doGenerateSubmoduleConfigurations: false, 
-        extensions: [], 
-        submoduleCfg: [], 
-        userRemoteConfigs: [[url: 'https://github.com/valdeploy/postman.git']]])
-      }
+         checkout scm
+           }
     }
-
     stage('run Test newman') {
            steps {
               sh 'newman run postman/test.postman_collection.json'
