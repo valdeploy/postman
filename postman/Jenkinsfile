@@ -23,7 +23,7 @@ pipeline {
     
 	stage('run Test newman') {
            steps {
-              sh 'newman run BloomApi.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
+              sh 'newman run test.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
               junit "*.xml"
               
               
