@@ -8,9 +8,6 @@ pipeline {
       }
     }          
     stage('Test') {
-      steps {
-          sh 'npm config ls'
-      }
     }             
   }
 }
