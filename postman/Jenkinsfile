@@ -1,28 +1,21 @@
 pipeline {
-
-    agent any
-
-   stages {
-       
-   stage('Clean Workspace'){
+  agent any
+  stages {     
+    stage('Clean Workspace'){
       steps {
         cleanWs()
       }
     }
-     
     stage('Checkout'){
       steps {
         checkout([$class: 'GitSCM', 
         branches: [[name: '*/main']])
       }
     }  
-    
-	stage('run Test newman') {
+    stage('run Test newman') {
            steps {
               sh 'newman run test.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
-              junit "*.xml"
-              
-              
+              junit "*.xml"          
       publishHTML target: [
             allowMissing: false,
             alwaysLinkToLastBuild: false,
@@ -30,9 +23,15 @@ pipeline {
             reportDir: '.',
             reportFiles: 'newman_result.html',
             reportName: 'Newman HTML Reporter'
-    ]  
-           }
-           
+        ]  
+      }
+    }
+      stage('Allure Report') {
+      steps {
+          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              allure includeProperties: false, jdk: 'java17', report: 'build/reports/allure-report', results: [[path: 'build/allure-results']]
+          }
+      }
+    }     
     }
    }
-}
