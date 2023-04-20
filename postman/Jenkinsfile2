@@ -1,18 +1,12 @@
 pipeline {
   agent any
-
- tools {nodejs "latest"}
+  tools {nodejs "latest"}
   stages {    
- stage ('Checkout') {
-            steps {
-                checkout scm
-            }
-        }      
-    stage('Install dependencies') {
+    stage ('Checkout') {
       steps {
-        sh 'npm i -save express'
+          checkout scm
       }
-    }     
+    }          
     stage('Test') {
       steps {
           sh 'npm config ls'
