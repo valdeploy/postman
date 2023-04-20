@@ -18,16 +18,17 @@ pipeline {
                bat "node -v"
             }
         }
-        stage('Install bootstrap') {
-            steps {
-                echo "install bootstrap"
-                bat "npm install -g bootstrap@4.0.0-alpha.6"
-            }
-        }
+//         stage('Install bootstrap') {
+//             steps {
+//                 echo "install bootstrap"
+//                 bat "npm install -g bootstrap@4.0.0-alpha.6"
+//             }
+//         }
         stage('Install Newman') {
             steps {
+                 bat 'npm install'
                 echo "install newman"
-                bat "npm install -g newman"
+                bat "npm install newman"
                 bat "newman -v"
             }
         }
