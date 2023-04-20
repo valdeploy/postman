@@ -24,7 +24,7 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "newman run postman/test.postman_collection.json"
+                 bat "node newman run postman/test.postman_collection.json"
 
             }
         }
