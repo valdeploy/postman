@@ -13,11 +13,7 @@ pipeline {
     stage('Checkout'){
       steps {
         checkout([$class: 'GitSCM', 
-        branches: [[name: '*/postman']], 
-        doGenerateSubmoduleConfigurations: false, 
-        extensions: [], 
-        submoduleCfg: [])
-
+        branches: [[name: '*/main']])
       }
     }  
     
