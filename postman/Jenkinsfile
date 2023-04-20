@@ -15,7 +15,9 @@ pipeline {
         submoduleCfg: [], 
         userRemoteConfigs: [[url: 'https://github.com/valdeploy/postman.git']]])
       }
-    }  
+    }
+  }
+}
 //     stage('run Test newman') {
 //            steps {
 //               sh 'newman run postman/test.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export "bloom_uat_result.xml" --reporter-htmlextra-export "newman_result.html" '
@@ -38,4 +40,4 @@ pipeline {
 //       }
 //     }     
 //     }
-   }
+//    }
