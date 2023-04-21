@@ -12,31 +12,31 @@ pipeline {
               }
             }          
 
-//         stage('Version node') {
-//             steps {
-//                echo "Version node"
-//                bat "node -v"
-//             }
-//         }
-//         stage('Install bootstrap') {
-//             steps {
-//                 echo "install bootstrap"
-//                 bat "npm install -g bootstrap@4.0.0-alpha.6"
-//             }
-//         }
-//         stage('Install Npm') {
-//             steps {
-//                 bat "npm install -g npm"
-//                 bat "npm -v"
-//             }
-//         }
+        stage('Version node') {
+            steps {
+               echo "Version node"
+               bat "node -v"
+            }
+        }
+        stage('Install bootstrap') {
+            steps {
+                echo "install bootstrap"
+                bat "npm install -g bootstrap@4.0.0-alpha.6"
+            }
+        }
+        stage('Install Npm') {
+            steps {
+                bat "npm install -g npm"
+                bat "npm -v"
+            }
+        }
 
-               stage('Install Newman') {
+          stage('Install Newman') {
              steps {
 //                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
                     bat "npm install -g newman"
                     bat "cd ../"        
-                    bat "node newman -v"
+                    bat "newman -v"
 //                  }
             }
         }
