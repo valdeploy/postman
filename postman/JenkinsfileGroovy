@@ -1,16 +1,16 @@
 #!groovy
 pipeline {
-  agent any}
-stages{
-  stage('checkout') {
-    checkout scm
-  }
-  stage('Test') {
-    script {
+  agent any
+  stages{
+    stage('checkout') {
+      checkout scm
+    }
+    stage('Test') {
+      script {
         try {
           withDockerContainer("postman/newman:alpine"){
-                sh 'newman run postman/test.postman_collection.json'
-               }
+            sh 'newman run postman/test.postman_collection.json'
+           }
         }
         catch(e) {
         }
