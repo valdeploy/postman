@@ -1,10 +1,10 @@
 #!groovy
-def label = "worker-${UUID.randomUUID().toString()}"
-node(label) {
+pipeline {
+  agent any}
+stages{
   stage('checkout') {
     checkout scm
   }
-  properties([pipelineTriggers([cron('0 1,18 * * *')])])
   stage('Test') {
     script {
         try {
@@ -15,5 +15,6 @@ node(label) {
         catch(e) {
         }
     }
+  }
   }
 }
