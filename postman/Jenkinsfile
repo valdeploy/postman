@@ -31,9 +31,11 @@ pipeline {
             }
         }
          stage('Install Newman') {
-            steps {
-                bat "npm install -g newman"
-                bat "newman -v"
+             steps {
+                 nodejs(cacheLocationStrategy: executor()) {
+                    bat "npm install -g newman"
+                    bat "newman -v"
+                 }
             }
         }
 //         stage('Tests') {
