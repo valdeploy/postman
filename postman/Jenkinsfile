@@ -21,13 +21,13 @@ pipeline {
         stage('Install bootstrap') {
             steps {
                 echo "install bootstrap"
-                bat "npm install -g bootstrap@4.0.0-alpha.6"
+                bat "npm install bootstrap@4.0.0-alpha.6"
             }
         }
           stage('Install Newman') {
              steps {
 //                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
-                    bat "npm install -g newman"
+                    bat "npm install newman"
                     bat "dir"
                     bat "cd ../"      
                     bat "dir"
