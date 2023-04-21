@@ -28,7 +28,7 @@ pipeline {
              steps {
 //                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
                     bat "npm install newman"
-                    bat "cd node_modules/newman/bin"      
+                    bat "cd ./node_modules/newman/bin"      
                     bat "dir"
 //                     bat "newman -v"
 //                  }
