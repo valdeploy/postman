@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	environment {
-	    APP_DOCKER_IMAGE = "postman/newman:latest"
+	    APP_DOCKER_IMAGE = postman/newman:latest
 	}
 	stages {
 	    stage('Build Image of Calculator') {
