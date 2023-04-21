@@ -30,7 +30,7 @@ pipeline {
                 bat "npm install node"
                 bat "npm install newman"
                 bat "dir"
-                bat "cd ./node_modules/newman/bin"
+                bat "cd node_modules/newman/bin"
                 bat "newman -v"
             }
         }
@@ -52,7 +52,7 @@ pipeline {
                  echo "Run tests"
 //                                         sh "./node_modules/.bin/nightwatch -e chrome,firefox,ie,edge --test tests/guineaPig.js || true"
 
-                 bat "node ./node_modules/newman/bin/newman run /postman/test.postman_collection.json"
+                 bat "node newman run /postman/test.postman_collection.json"
             }
         }
 
