@@ -5,7 +5,7 @@ pipeline{
 		
 		stage('Construyendo el artefacto para las pruebas Postman'){
 			agent{
-				docker{image 'node:latest
+				docker{image 'node:latest'}
 			}
 			steps{
 				sh 'npm install -g newman'
