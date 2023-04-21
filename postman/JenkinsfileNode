@@ -1,48 +1,17 @@
 pipeline{
 	agent any
-	environment {
-	    APP_DOCKER_IMAGE = postman/newman:latest
-	}
-	stages {
-	    stage('Build Image of Calculator') {
-    	   steps {
-   	         echo 'Building ${APP_DOCKER_IMAGE}'
-			 sh 'ls -la'
-   	         sh 'docker build -t ${APP_DOCKER_IMAGE} .'
+
+	stages{
+		
+		stage('Construyendo el artefacto para las pruebas Postman'){
+			agent{
+				docker{image 'node:latest
 			}
-    	}
-    	stage('Build Image for test With Newman') {
-    	   steps {
-   	          sh 'docker build -t ${APP_DOCKER_IMAGE} ./test-newman/'
+			steps{
+				sh 'npm install -g newman'
+				sh 'newman run postman/test.postman_collection.json'
 			}
-    	}
-		stage('Generate docker-compose.yml') {
-    	   steps {
-   	          echo 'Generate a docker-compose file'
-   	          sh "sed -i 's@{{APP_DOCKER_IMAGE}}@${APP_DOCKER_IMAGE}@g' docker-compose.dist"
-   	          sh "cat docker-compose.dist"
-			}
-    	}
-		stage('Executing docker-compose') {
-    	   steps {
-   	          sh 'docker-compose -f docker-compose.dist up -d'
-   	          sh 'sleep 20'
-   	          sh 'docker-compose -f docker-compose.dist ps'
-   	          echo '*********** LOGS DEL SERVICE TEST-NEWMAN ********************'
-   	          sh 'docker-compose logs test-newman'
-			}
-    	}
-	}
-	post{
-		always{
-			echo "Down ephemeral environment"
-			sh 'docker-compose -f docker-compose.dist down' 
-		}
-		success{
-			echo "========pipeline executed successfully ========"
-		}
-		failure{
-			echo "========pipeline execution failed========"
 		}
 	}
+	
 }
