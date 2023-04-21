@@ -3,14 +3,17 @@ pipeline{
 	stages{
 		stage('Prepare api version'){
 			agent{
-				docker {image 'maven:3.6.3-jdk-11-slim'}
+				docker {image 'postman/newman'}
 			}
 			steps{
+			     withDockerContainer("postman/newman:alpine"){
+
 				sh "sed -i ./postman/test.postman_collection.json"
 			    echo "executing docker postman compose"
 				sh "docker-compose -f postman-compose.dist up"
 				sh "sleep 5"
 				sh "docker-compose -f postman-compose.dist ps"
+				}
 			}
 		}
 	}
