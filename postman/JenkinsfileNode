@@ -8,8 +8,11 @@ pipeline{
 				docker{image 'node:latest'}
 			}
 			steps{
+			        docker.image(node).inside {
+
 				sh 'npm install -g newman'
 				sh 'newman run postman/test.postman_collection.json'
+				}
 			}
 		}
 	}
