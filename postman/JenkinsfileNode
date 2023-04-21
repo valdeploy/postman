@@ -13,6 +13,7 @@ pipeline{
 				sh 'npm install -g newman'
 				sh 'newman run postman/test.postman_collection.json'
 				}
+				}
 			}
 		}
 	}
