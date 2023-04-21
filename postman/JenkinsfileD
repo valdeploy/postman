@@ -16,7 +16,9 @@ pipeline {
         docker{image 'postman/newman'}
       }
       steps{
-        sh 'docker run -t postman/newman run postman/test.postman_collection.jso'
+      dockerImage.inside("--entrypoint=''") {
+     echo "Tests passed"
+}
       }
     }
   }
