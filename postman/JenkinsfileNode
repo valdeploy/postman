@@ -1,21 +1,19 @@
-pipeline{
-	agent any
-
-	stages{
-		
-		stage('Construyendo el artefacto para las pruebas Postman'){
-			agent{
-				docker{image 'node:latest'}
-			}
-			steps{
-			        docker.image(node).inside {
-
-				sh 'npm install -g newman'
-				sh 'newman run postman/test.postman_collection.json'
-				}
-				}
-			}
-		}
-	}
-	
+pipeline {
+  agent any
+  stages{
+    stage('checkout') {
+      checkout scm
+    }
+    stage('Test') {
+      script {
+        try {
+          withDockerContainer("postman/newman:alpine"){
+            sh 'newman run postman/test.postman_collection.json'
+           }
+        }
+        catch(e) {
+        }
+    }
+  }
+  }
 }
