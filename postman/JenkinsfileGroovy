@@ -1,7 +1,17 @@
 pipeline {
   agent any
-  tools {nodejs "node"}
+    tools {nodejs "node"}
   stages {
+    stage('Clean Workspace'){
+      steps {
+        cleanWs()
+      }
+    }
+    stage ('Checkout') {
+      steps {
+        checkout scm
+      }
+    }          
     stage('Setup Postman') {
       steps {
         echo "Test Postman newman"
