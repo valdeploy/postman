@@ -1,27 +1,27 @@
 #!groovy
 def label = "worker-${UUID.randomUUID().toString()}"
 podTemplate(label: label,
-    containers:
-    [
-        containerTemplate(name: 'newman', image: 'postman/newman:alpine', privileged: false, command: 'cat', ttyEnabled: true)
-    ]
-    ){
-    node(label) {
-        stage('checkout') {
-            checkout scm
-        }
-        properties([pipelineTriggers([cron('0 1,18 * * *')])])
-        stage('Country API Test') {
-            script {
-                try {
-                    container('newman') {
-                        sh 'newman run postman/test.postman_collection.json'
-                       }
-                }
-                catch(e) {
-                   
-                }
-            }
-        }
-    }
+            containers:
+            [
+              containerTemplate(name: 'newman', image: 'postman/newman:alpine', privileged: false, command: 'cat', ttyEnabled: true)
+            ]
+           ){
+  node(label) {
+    stage('checkout') {
+      checkout scm
+    }
+    properties([pipelineTriggers([cron('0 1,18 * * *')])])
+  stage('Country API Test') {
+    script {
+        try {
+            container('newman') {
+                sh 'newman run postman/test.postman_collection.json'
+               }
+        }
+        catch(e) {
+
+        }
+    }
+    }
+  }
 }
