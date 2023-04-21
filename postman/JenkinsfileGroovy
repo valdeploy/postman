@@ -1,22 +1,17 @@
-pipeline {
-  agent any
-    tools {nodejs "node"}
-  stages {
-    stage('Clean Workspace'){
-      steps {
-        cleanWs()
-      }
-    }
-    stage ('Checkout') {
-      steps {
-        checkout scm
-      }
-    }          
-    stage('Setup Postman') {
-      steps {
-        echo "Test Postman newman"
-        sh 'newman run postman/test.postman_collection.json'
-        }
-        }		
-        }
-        }
+pipeline{
+	agent any
+	stages{
+		stage('Prepare api version'){
+			agent{
+				docker {image 'maven:3.6.3-jdk-11-slim'}
+			}
+			steps{
+				sh "sed -i ./postman/test.postman_collection.json"
+			    echo "executing docker postman compose"
+				sh "docker-compose -f postman-compose.dist up"
+				sh "sleep 5"
+				sh "docker-compose -f postman-compose.dist ps"
+			}
+		}
+	}
+}
