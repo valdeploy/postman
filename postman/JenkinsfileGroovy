@@ -1,12 +1,12 @@
 pipeline {
-    agent any
-	tools {nodejs "node"}
-    stages {
-		stage('Setup Postman') {
-			steps {
-				echo "Test Postman newman"
-				sh 'newman run postman/test.postman_collection.json'
-			}
-		}		
-    }
-}
+  agent any
+  tools {nodejs "node"}
+  stages {
+    stage('Setup Postman') {
+      steps {
+        echo "Test Postman newman"
+        sh 'newman run postman/test.postman_collection.json'
+        }
+        }		
+        }
+        }
