@@ -29,7 +29,8 @@ pipeline {
                 bat "npm install -g npm"
                 bat "npm install node"
                 bat "npm install newman"
-                bat "cd /node_modules/newman/bin"
+                bat "dir"
+                bat "cd ./node_modules/newman/bin"
                 bat "newman -v"
             }
         }
