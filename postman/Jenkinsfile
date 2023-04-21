@@ -30,14 +30,22 @@ pipeline {
                 bat "npm -v"
             }
         }
-         stage('Install Newman') {
-             steps {
-//                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
-                    bat "npm install -g newman"
-                    bat "node newman -v"
-//                  }
-            }
-        }
+        stage('Automation') {
+            node('ts-build') {
+            def collectionName = 'postman/test.postman_collection.json'
+            docker.image('postman/newman_ubuntu1404').inside("--entrypoint=''"){
+            sh "newman run '$collectionName'"
+     }
+  }
+}
+//          stage('Install Newman') {
+//              steps {
+// //                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
+//                     bat "npm install -g newman"
+//                     bat "node newman -v"
+// //                  }
+//             }
+//         }
 //         stage('Tests') {
 //             steps {
 //                  echo "Run tests"
