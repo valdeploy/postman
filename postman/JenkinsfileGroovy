@@ -3,7 +3,7 @@ def label = "worker-${UUID.randomUUID().toString()}"
 podTemplate(label: label,
             containers:
             [
-              containerTemplate(name: 'newman', image: 'postman/newman:alpine', privileged: false, command: 'cat', ttyEnabled: true)
+              withDockerContainer(name: 'newman', image: 'postman/newman:alpine', privileged: false, command: 'cat', ttyEnabled: true)
             ]
            ){
   node(label) {
