@@ -16,8 +16,7 @@ pipeline {
         docker{image 'postman/newman'}
       }
       steps{
-        sh 'npm install -g newman'
-        sh 'newman run postman/test.postman_collection.jso'
+        sh 'docker run -t postman/newman run postman/test.postman_collection.jso'
       }
     }
   }
