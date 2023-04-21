@@ -1,20 +1,12 @@
 pipeline {
-  agent any
-  stages {
-    stage('Clean Workspace'){
-      steps {
-        cleanWs()
-      }
+    agent any
+	tools {nodejs "node"}
+    stages {
+		stage('Setup Postman') {
+			steps {
+				echo "Test Postman newman"
+				sh 'newman run postman/test.postman_collection.json'
+			}
+		}		
     }
-    stage ('Checkout') {
-      steps {
-        checkout scm
-      }
-    }          
-    stage('Testing...') {
-     withDockerContainer("postman/newman:alpine"){
-        sh 'newman run postman/test.postman_collection.jso'
-      }
-    }
-  }
 }
