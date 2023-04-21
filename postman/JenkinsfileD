@@ -1,0 +1,24 @@
+pipeline {
+  agent any
+  stages {
+    stage('Clean Workspace'){
+      steps {
+        cleanWs()
+      }
+    }
+    stage ('Checkout') {
+      steps {
+        checkout scm
+      }
+    }          
+    stage('Automation') {
+      steps {
+        node('ts-build') {
+          docker.image('postman/newman_ubuntu1404').inside("--entrypoint=''"){
+          sh "newman run postman/test.postman_collection.json"
+        }
+      }
+    }
+    }
+  }
+}
