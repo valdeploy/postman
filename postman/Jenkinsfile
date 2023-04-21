@@ -12,35 +12,36 @@ pipeline {
               }
             }          
 
-        stage('Version node') {
-            steps {
-               echo "Version node"
-               bat "node -v"
-            }
-        }
-        stage('Install bootstrap') {
-            steps {
-                echo "install bootstrap"
-                bat "npm install -g bootstrap@4.0.0-alpha.6"
-            }
-        }
-        stage('Install Npm') {
-            steps {
-                bat "npm install -g npm"
-                bat "npm -v"
-            }
-        }
+//         stage('Version node') {
+//             steps {
+//                echo "Version node"
+//                bat "node -v"
+//             }
+//         }
+//         stage('Install bootstrap') {
+//             steps {
+//                 echo "install bootstrap"
+//                 bat "npm install -g bootstrap@4.0.0-alpha.6"
+//             }
+//         }
+//         stage('Install Npm') {
+//             steps {
+//                 bat "npm install -g npm"
+//                 bat "npm -v"
+//             }
+//         }
         stage('Automation') {
              steps {
-            node('ts-build') {
-            def collectionName = 'postman/test.postman_collection.json'
-            docker.image('postman/newman_ubuntu1404').inside("--entrypoint=''"){
-            sh "newman run '$collectionName'"
+                 node('ts-build') {
+                     docker.image('postman/newman_ubuntu1404').inside("--entrypoint=''"){
+                         sh "newman run postman/test.postman_collection.json"
             }
      }
   }
 }
-//          stage('Install Newman') {
+    }
+}
+      //          stage('Install Newman') {
 //              steps {
 // //                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
 //                     bat "npm install -g newman"
@@ -57,5 +58,5 @@ pipeline {
 //             }
 //         }
 
-    }
-}
+//     }
+// }
