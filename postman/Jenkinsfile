@@ -22,7 +22,7 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run BloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html"
+                 bat "npx newman run postman/test.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html"
             }
         }
     }
