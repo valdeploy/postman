@@ -30,7 +30,7 @@ pipeline {
             steps {
                  echo "Run tests"
                  bat "npx newman run postman/test.postman_collection.json -r allure --reporter-allure-export allure-results"
-                 bat "allure includeProperties: false, jdk: 'java17', report: 'allure', results: [[path: 'allure-results']]"
+                 allure includeProperties: false, jdk: 'java17', report: 'allure', results: [[path: 'allure-results']]
 
             }
         }
