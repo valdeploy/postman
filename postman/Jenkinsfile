@@ -33,7 +33,7 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run /postman/test.postman_collection.json"
+                 bat "npx newman run postman/test.postman_collection.json"
             }
         }
 
