@@ -16,7 +16,8 @@ pipeline {
         docker{image 'postman/newman@1.0.0'}
       }
       steps{
-        npm install newman
+        bat 'sudo usermod -a -G docker jenkins'
+        bat 'npm install newman'
       }
     }
   }
