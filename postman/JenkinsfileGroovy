@@ -1,20 +1,18 @@
-pipeline{
-	agent any
-	stages{
-		stage('Prepare api version'){
-			agent{
-				docker {image 'postman/newman'}
-			}
-			steps{
-			     withDockerContainer("postman/newman:alpine"){
+pipeline {
+  agent any
 
-				sh "sed -i ./postman/test.postman_collection.json"
-			    echo "executing docker postman compose"
-				sh "docker-compose -f postman-compose.dist up"
-				sh "sleep 5"
-				sh "docker-compose -f postman-compose.dist ps"
-				}
-			}
-		}
-	}
+  tools {nodejs "node"}
+
+  stages {        
+    stage('Install dependencies') {
+      steps {
+        sh 'npm i -save express'
+      }
+    }     
+    stage('Test') {
+      steps {
+         sh "npx newman -v"
+      }
+    }             
+  }
 }
