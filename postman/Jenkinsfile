@@ -10,19 +10,20 @@ pipeline {
             steps {
                 checkout scm
               }
-            }          
+            }
           stage('Install Newman') {
              steps {
                     bat "npm install newman"
                     bat "npx newman -v"
+                    bat "npm install -g newman-reporter-allure"
+                    bat "npm install -g newman-reporter-htmlextra"
             }
         }
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run postman/test.postman_collection.json"
+                 bat "npx newman run BloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export Allure --reporter-htmlextra-export TestResults/HtmlReport.html"
             }
         }
-
     }
 }
