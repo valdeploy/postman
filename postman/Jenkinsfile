@@ -39,8 +39,7 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run postman/test.postman_collection.json 
-		    -r cli,junit,allure,html,htmlextra \
+                 bat "npx newman run postman/test.postman_collection.json -r cli,junit,allure,html,htmlextra \
 		    --reporter-allure-export allure-results \
                     --reporter-junit-export ${REPORT_JUNIT_NAME} \
                     --reporter-html-export /{REPORT_COMPATIBLE_FILE_NAME} \
