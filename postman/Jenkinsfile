@@ -26,22 +26,16 @@ pipeline {
         }
           stage('Install Newman') {
              steps {
-//                  nodejs(nodeJSInstallationName: 'Node', cacheLocationStrategy: executor()) {
                     bat "npm install newman"
-//                     bat "cd /node_modules/newman/bin"      
-//                     bat "dir"
                     bat "npx newman -v"
-//                  }
             }
         }
-//         stage('Tests') {
-//             steps {
-//                  echo "Run tests"
-// //                                         sh "./node_modules/.bin/nightwatch -e chrome,firefox,ie,edge --test tests/guineaPig.js || true"
-
-//                  bat "node newman run /postman/test.postman_collection.json"
-//             }
-//         }
+        stage('Tests') {
+            steps {
+                 echo "Run tests"
+                 bat "npx newman run /postman/test.postman_collection.json"
+            }
+        }
 
     }
 }
