@@ -30,7 +30,7 @@ pipeline {
                     bat "npm install newman"
 //                     bat "cd /node_modules/newman/bin"      
 //                     bat "dir"
-                    bat "newman -v"
+                    bat "npx newman -v"
 //                  }
             }
         }
