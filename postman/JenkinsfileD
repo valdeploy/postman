@@ -13,11 +13,15 @@ pipeline {
     }          
     stage('Testing...') {
     agent{
-        docker{image 'postman/newman@1.0.0'}
+        docker{
+          image 'postman/newman:latest'
+          reuseNode true}
+
       }
       steps{
-        bat 'sudo usermod -a -G docker jenkins'
-        bat 'npm install newman'
+        bat 'npm -v'
+       // bat 'sudo usermod -a -G docker jenkins'
+       // bat 'npm install newman'
       }
     }
   }
