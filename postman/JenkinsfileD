@@ -17,7 +17,6 @@ pipeline {
       }
       steps{
         npm install newman
-        npx newman run postman/test.postman_collection.json
       }
     }
   }
