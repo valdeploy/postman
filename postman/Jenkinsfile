@@ -28,9 +28,7 @@ pipeline {
             }
           stage('Install Newman') {
              steps {
-                                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-
-//                     bat "mkdir allure-results"
+                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     bat "npm install newman"
                     bat "npx newman -v"
                     bat "npm install -g newman-reporter-allure"
@@ -41,18 +39,20 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run postman/test.postman_collection.json -r cli,junit,allure,html,htmlextra \
-                    --reporter-junit-export ${REPORT_FOLDER}/${REPORT_JUNIT_NAME} \
-                    --reporter-html-export ${REPORT_FOLDER}/${REPORT_COMPATIBLE_FILE_NAME} \
+                 bat "npx newman run postman/test.postman_collection.json 
+		    -r cli,junit,allure,html,htmlextra \
+		    --reporter-allure-export allure-results \
+                    --reporter-junit-export ${REPORT_JUNIT_NAME} \
+                    --reporter-html-export /{REPORT_COMPATIBLE_FILE_NAME} \
                     --reporter-html-template ${HTML_REPORT_TEMPLATE_PATH} \
-                    --reporter-htmlextra-export ${REPORT_FOLDER}/${REPORT_RICH_FILE_NAME} \
+                    --reporter-htmlextra-export ${REPORT_RICH_FILE_NAME} \
                     -x"
             }
         }
         stage('Allure Report') {
             steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
+            allure includeProperties: false, jdk: 'java17', report: 'allure-report', results: [[path: 'allure-results']]
         }
     }
     }
