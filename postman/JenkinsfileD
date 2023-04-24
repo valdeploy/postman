@@ -13,12 +13,12 @@ pipeline {
     }          
     stage('Testing...') {
     agent{
-        docker{image 'postman/newman'}
+        docker{image 'postman/newman@1.0.0'}
       }
       steps{
-      dockerImage.inside("--entrypoint=''") {
-     echo "Tests passed"
-}
+      npm install newman
+      npm install newman-reporter-htmlextra
+      npx newman run "postman/test.postman_collection.json" -r cli,htmlextra,junit  --folder "Reports" --reporter-htmlextra-export newman/report.html  --reporter-junit-export newman/report.xml
       }
     }
   }
