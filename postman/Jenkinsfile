@@ -29,17 +29,17 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run postman/test.postman_collection.json --reporters allure --reporter-allure-export postman/allure-results"
-//                  allure includeProperties: false, jdk: 'java17', report: 'build/reports/allure-report', results: [[path: 'build/allure-results']]
+                 bat "npx newman run postman/test.postman_collection.json -r allure --reporter-allure-export allure-results"
+                 bat "allure includeProperties: false, jdk: 'java17', report: 'allure', results: [[path: 'allure-results']]"
 
             }
         }
-        stage('Allure Report') {
-            steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-        }
-    }
-    }
+//         stage('Allure Report') {
+//             steps {
+//             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+//             allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
+//         }
+//     }
+//     }
     }
 }
