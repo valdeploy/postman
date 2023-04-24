@@ -18,7 +18,7 @@ pipeline {
              steps {
                                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 
-                    bat "mkdir allure-results"
+//                     bat "mkdir allure-results"
                     bat "npm install newman"
                     bat "npx newman -v"
                     bat "npm install -g newman-reporter-allure"
@@ -29,7 +29,9 @@ pipeline {
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run postman/test.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export TestResults/HtmlReport.html"
+                 bat "npx newman run postman/test.postman_collection.json --reporters allure --reporter-allure-export postman/allure-results"
+//                  allure includeProperties: false, jdk: 'java17', report: 'build/reports/allure-report', results: [[path: 'build/allure-results']]
+
             }
         }
         stage('Allure Report') {
