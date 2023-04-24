@@ -16,11 +16,14 @@ pipeline {
             }
           stage('Install Newman') {
              steps {
+                                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+
                     bat "mkdir allure-results"
                     bat "npm install newman"
                     bat "npx newman -v"
                     bat "npm install -g newman-reporter-allure"
                     bat "npm install -g newman-reporter-htmlextra"
+                                 }
             }
         }
         stage('Tests') {
