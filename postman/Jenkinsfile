@@ -23,15 +23,15 @@ pipeline {
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
-            }
-        }
-    stage('Tests') {
-      if(${project}=='bloom'){
+               if(${project}=='bloom'){
         echo "yes======================="
       }
       else{
         echo "no======================="
       }
+            }
+        }
+    stage('Tests') {
       parallel {
         stage('one') {
           steps {
