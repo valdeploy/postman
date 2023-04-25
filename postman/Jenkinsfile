@@ -28,9 +28,9 @@ pipeline {
       stage('Tests') {
         steps {
           script {
-             String p = "${project}"
+             p = "${project}"
              echo p
-             if (p =='all') {
+             if (p==='all') {
                  echo "parallel"
               parallel {
                 stage('bloomAPI') {
