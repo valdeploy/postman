@@ -26,6 +26,12 @@ pipeline {
             }
         }
     stage('Tests') {
+      if(${project}=='bloom'){
+        echo "yes======================="
+      }
+      else{
+        echo "no======================="
+      }
       parallel {
         stage('one') {
           steps {
