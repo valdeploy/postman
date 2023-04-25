@@ -31,7 +31,6 @@ pipeline {
              if ('all' in "${project}") {
                  echo "parallel"
                  stage('Hello') {
-      failFast false
       parallel {
         stage('one') {
           steps {
