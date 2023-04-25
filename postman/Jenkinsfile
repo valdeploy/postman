@@ -26,15 +26,14 @@ pipeline {
                     echo  "${project}"
 
 
-//                 script {
-//                   echo  ${parameters.project}
-//                   if (parameters.project=='bloom') {
-//                        echo "yes======================="
-//                      }
-//                      else{
-//                        echo "no======================="
-//                      }
-//                 }
+                script {
+                  if ("${project}"=='bloom') {
+                       echo "yes======================="
+                     }
+                     else{
+                       echo "no======================="
+                     }
+                }
             }
         }
     stage('Tests') {
