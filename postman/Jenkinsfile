@@ -4,10 +4,8 @@ pipeline {
         jdk 'java17'
     }
     parameters {
-            choice(name: 'project', choices: ['bloom', 'login', 'Three'], description: '')
+            choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta'], description: '')
     }
-
-//     parameters { project(name: 'project', defaultValue: 'bloom', choices: ['bloom', 'login'], description: '') }
     stages {
          stage('Clean Workspace'){
         steps {
@@ -21,7 +19,6 @@ pipeline {
             }
           stage('Install Newman') {
              steps {
-                    bat "mkdir reports/allure-report"
                     bat "npm install newman"
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
