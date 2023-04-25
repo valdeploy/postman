@@ -24,12 +24,13 @@ pipeline {
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
                 script {
-                  if (parameters.project=='bloom') {
-                       echo "yes======================="
-                     }
-                     else{
-                       echo "no======================="
-                     }
+                  echo  ${parameters.project}
+//                   if (parameters.project=='bloom') {
+//                        echo "yes======================="
+//                      }
+//                      else{
+//                        echo "no======================="
+//                      }
                 }
             }
         }
