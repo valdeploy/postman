@@ -7,7 +7,6 @@ pipeline {
       choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
     }
     stages {
-       String p = "${project}"
       stage('Clean Workspace'){
         steps {
           cleanWs()
@@ -29,7 +28,8 @@ pipeline {
       stage('Tests') {
         steps {
           script {
-             if (!"${project}".equals("all")) {
+             String p = "${project}"
+             if (p.equals("all")) {
                  echo "parallel"
               parallel {
                 stage('bloomAPI') {
