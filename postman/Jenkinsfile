@@ -34,17 +34,17 @@ pipeline {
       parallel {
         stage('one') {
           steps {
-            sh 'echo one; exit 1'
+            echo 'one; exit 1'
           }
         }
         stage('two') {
           steps {
-            sh 'echo two'
+            echo 'two'
           }         
         }
         stage('three') {
           steps {
-            sh 'echo three'
+            echo 'three'
           }         
         }
       }
