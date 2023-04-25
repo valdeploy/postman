@@ -23,7 +23,7 @@ pipeline {
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
-               if(${project}=='bloom'){
+               if('bloooom'=='bloom'){
         echo "yes======================="
       }
       else{
