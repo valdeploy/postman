@@ -1,55 +1,29 @@
 pipeline {
-    agent any
-    tools {
-        jdk 'java17'
-    }
-    parameters {
-            choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
-    }
-    stages {
-         stage('Clean Workspace'){
-        steps {
-          cleanWs()
-          }
+  agent any
+  stages {
+    stage('First') {
+      steps {
+        sh 'echo "This stage is going to run very first"'
       }
-        stage ('Checkout') {
-            steps {
-                checkout scm
-              }
-            }
-          stage('Install Newman') {
-             steps {
-                    bat "npm install newman"
-                    bat "npx newman -v"
-                    bat "npm install newman-reporter-allure"
-                    bat "npm install newman-reporter-htmlextra"
-            }
-        }
-        stage('Tests') {
-            parallel {
-                stage{
-                    steps {
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            echo "Run tests"
-                            bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                                   }
-                    }
-                stage{   
-                    steps {
-                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                            bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI2htmlreport.html"
-                              }
-                            }
-                }  
-                    }
-                }
-        }
-        stage('Allure Report') {
-            steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-        }
     }
+    stage('Hello') {
+      parallel {
+        stage('one') {
+          steps {
+            sh 'echo one; exit 1'
+          }
+        }
+        stage('two') {
+          steps {
+            sh 'echo two'
+          }         
+        }
+        stage('three') {
+          steps {
+            sh 'echo three'
+          }         
+        }
+      }
     }
-    }
+  }
 }
