@@ -29,7 +29,8 @@ pipeline {
         steps {
           script {
              String p = "${project}"
-             if (p.equals("all")) {
+             echo p
+             if (p.equals('all')) {
                  echo "parallel"
               parallel {
                 stage('bloomAPI') {
