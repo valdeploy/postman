@@ -27,7 +27,7 @@ pipeline {
       }
       stage('Tests') {
         steps {
-//           script {
+          script {
              if ('all' in "${project}") {
                  echo "parallel"
               parallel {
@@ -61,7 +61,7 @@ pipeline {
 //                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-//                       }
+                      }
 //                     }
 //                   }
               }
