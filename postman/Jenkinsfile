@@ -23,12 +23,12 @@ pipeline {
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
-               if(0==6){
-                 echo "yes======================="
-               }
-               else{
-                 echo "no======================="
-               }
+                     if (0==6) {
+                       echo "yes======================="
+                     }
+                     else{
+                       echo "no======================="
+                     }
             }
         }
     stage('Tests') {
