@@ -30,21 +30,21 @@ pipeline {
           script {
             if ("${project}"=="all") {
               parallel {
-                stage('one') {
+                stage('bloomAPI') {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
                     }
                   }
-                stage('two') {
+                stage('bloomAPI2') {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
                     }         
                   }
-                stage('three') {
+                stage('bloomAPI3') {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
@@ -54,13 +54,13 @@ pipeline {
                 }
               }
               else{
-                stage('one') {
+//                 stage("${project}") {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
                     }
-                  }
+//                   }
               }
             }
           }
