@@ -4,7 +4,7 @@ pipeline {
         jdk 'java17'
     }
     parameters {
-            choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta'], description: '')
+            choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
     }
     stages {
          stage('Clean Workspace'){
@@ -27,8 +27,24 @@ pipeline {
         }
         stage('Tests') {
             steps {
-                 echo "Run tests"
-                 bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/htmlreport.html"
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo "Run tests"
+                    if (${project} != 'all') {
+                        bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/htmlreport.html"
+                    } else {
+                              parallel {
+                                   steps {
+                                  
+                        bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/htmlreport.html"
+                                   }   }     steps {
+
+                                  bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/htmlreport.html"
+                              }}
+                    }
+                    
+                    
+                    
+          }
             }
         }
         stage('Allure Report') {
