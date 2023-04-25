@@ -3,18 +3,9 @@ pipeline {
     tools {
         jdk 'java17'
     }
-    environment {
-    		PARAMS_Application = "postman/test"
-            ENVIRONMENT_NAME = "demo_env"
-            COLLECTION_NAME = getFileName(PARAMS_Application)
-            BASE_DIR = getFoldersPath(PARAMS_Application) //should end with '/' if present
-            COLLECTION_PATH = "./${BASE_DIR}${COLLECTION_NAME}.postman_collection.json"
-            REPORT_FOLDER = "${BASE_DIR}reports/"
-            REPORT_RICH_FILE_NAME = "${COLLECTION_NAME}_${ENVIRONMENT_NAME}_test_report_extra.html"
-            REPORT_COMPATIBLE_FILE_NAME = "${COLLECTION_NAME}_${ENVIRONMENT_NAME}_test_report.html"
-            REPORT_JUNIT_NAME = "junit.xml"
-            HTML_REPORT_TEMPLATE_PATH = "template-email-html.hbs"
-    }
+    parameters {
+            string(name: 'project', values: ['bloom', 'login'], defaultValue: 'bloom')
+        }
     stages {
          stage('Clean Workspace'){
         steps {
@@ -28,40 +19,25 @@ pipeline {
             }
           stage('Install Newman') {
              steps {
-                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    bat "mkdir reports/allure-report"
                     bat "npm install newman"
                     bat "npx newman -v"
-                    bat "npm install -g newman-reporter-allure"
-                    bat "npm install -g newman-reporter-htmlextra"
-                                 }
+                    bat "npm install newman-reporter-allure"
+                    bat "npm install newman-reporter-htmlextra"
             }
         }
         stage('Tests') {
             steps {
                  echo "Run tests"
-                 bat "npx newman run postman/test.postman_collection.json --reporters cli,junit,allure,html,htmlextra \
-		    --reporter-allure-export allure-report/allure-results \
-                    --reporter-junit-export ${REPORT_JUNIT_NAME} \
-                    --reporter-html-export /{REPORT_COMPATIBLE_FILE_NAME} \
-                    --reporter-html-template ${HTML_REPORT_TEMPLATE_PATH} \
-                    --reporter-htmlextra-export ${REPORT_RICH_FILE_NAME} \
-                    -x"
+                 bat "npx newman run ${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/htmlreport.html"
             }
         }
         stage('Allure Report') {
             steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            allure includeProperties: false, jdk: 'java17', report: 'allure-report', results: [[path: 'allure-report/allure-results']]
+            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
         }
     }
     }
     }
-    
-}
-def getFileName(String path) {
-	return path.substring(path.lastIndexOf('/') + 1)
-}
-
-def getFoldersPath(String path) {
-	return path.substring(0, path.lastIndexOf('/') + 1)
 }
