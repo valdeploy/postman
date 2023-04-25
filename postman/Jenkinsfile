@@ -23,8 +23,12 @@ pipeline {
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
+                     echo  ${parameters.project}
+                                 echo  ${project}
+
+
                 script {
-                  echo  ${parameters.project}
+//                   echo  ${parameters.project}
 //                   if (parameters.project=='bloom') {
 //                        echo "yes======================="
 //                      }
