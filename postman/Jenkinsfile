@@ -28,7 +28,7 @@ pipeline {
       stage('Tests') {
         steps {
           script {
-            if ("all" in params.project) {
+            if ("all" ==~ /(.*)${project}(.*)/) {
               parallel {
                 stage('bloomAPI') {
                   steps {
