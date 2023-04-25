@@ -33,21 +33,21 @@ pipeline {
              if ('all' in p) {
                  echo "parallel"
               parallel {
-                stage('bloomAPI') {
+                stage('one') {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
                     }
                   }
-                stage('bloomAPI2') {
+                stage('two') {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
                     }         
                   }
-                stage('bloomAPI3') {
+                stage('three') {
                   steps {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
