@@ -1,30 +1,30 @@
 pipeline {
   agent any
   tools {
-        jdk 'java17'
-    }
-    parameters {
-            choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
-    }
+    jdk 'java17'
+  }
+  parameters {
+    choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
+  }
   stages {
     stage('Clean Workspace'){
-        steps {
-          cleanWs()
-          }
+      steps {
+        cleanWs()
       }
-        stage ('Checkout') {
-            steps {
-                checkout scm
-              }
-            }
-          stage('Install Newman') {
-             steps {
-                    bat "npm install newman"
-                    bat "npx newman -v"
-                    bat "npm install newman-reporter-allure"
-                    bat "npm install newman-reporter-htmlextra"
-            }
-        }
+    }
+    stage ('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+    stage('Install Newman') {
+      steps {
+        bat "npm install newman"
+        bat "npx newman -v"
+        bat "npm install newman-reporter-allure"
+        bat "npm install newman-reporter-htmlextra"
+      }
+    }
     stage('Tests') {
       steps {
         script {
@@ -34,42 +34,34 @@ pipeline {
                 steps {
                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                                        }
+                    }
+                  }
                 }
-              }
               stage('two') {
                 steps {
                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                  bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                                        }
-                }         
-              }
+                    bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                    }
+                  }         
+                }
               stage('three') {
                 steps {
                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                  }
-                }         
+                    }
+                  }         
+                }
               }
             }
-//         else{
-//            steps {
-//             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-//                         bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/htmlreport.html"
-//             }}
-//         }
-      // }
-      }
-
-        stage('Allure Report') {
-            steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
+          }
         }
-    }
-    }
+      }
+    stage('Allure Report') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
+          }
+        }
       }
     }
   }
-}
-}
