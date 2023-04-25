@@ -30,7 +30,7 @@ pipeline {
           script {
              p = "${project}"
              echo p
-             if (p==='all') {
+             if ('all' in p) {
                  echo "parallel"
               parallel {
                 stage('bloomAPI') {
