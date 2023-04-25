@@ -30,6 +30,26 @@ pipeline {
           script {
              if ('all' in "${project}") {
                  echo "parallel"
+                 stage('Hello') {
+      failFast false
+      parallel {
+        stage('one') {
+          steps {
+            sh 'echo one; exit 1'
+          }
+        }
+        stage('two') {
+          steps {
+            sh 'echo two'
+          }         
+        }
+        stage('three') {
+          steps {
+            sh 'echo three'
+          }         
+        }
+      }
+    }
 //               parallel {
 //                 stage('one') {
 //                   steps {
