@@ -28,9 +28,9 @@ pipeline {
       stage('Tests') {
         steps {
           script {
-             p = "${project}"
-             echo p
-             if ('all' in p) {
+//              p = "${project}"
+//              echo p
+             if ('all' in "${project}") {
                  echo "parallel"
               parallel {
                 stage('one') {
