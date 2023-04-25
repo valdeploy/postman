@@ -23,20 +23,20 @@ pipeline {
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
-                script {
-                  if ("${project}"=='bloom') {
-                       echo "yes======================="
-                     }
-                     else{
-                       echo "no======================="
-                     }
-                }
+//                 script {
+//                   if ("${project}"=='bloom') {
+//                        echo "yes======================="
+//                      }
+//                      else{
+//                        echo "no======================="
+//                      }
+//                 }
             }
         }
     stage('Tests') {
-                      script {
+//                       script {
 
-      if ("${project}"=='all') {
+//       if ("${project}"=='all') {
       parallel {
         stage('one') {
           steps {
@@ -58,8 +58,8 @@ pipeline {
               bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
             }
           }         
-        }
-      }
+//         }
+//       }
 //         else{
 //            steps {
 //             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
