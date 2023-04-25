@@ -31,25 +31,28 @@ pipeline {
 //              if ('all' in "${project}") {
 //                  echo "parallel"
               parallel {
-                stage('one') {
-                  steps {
+//                 stage('one') {
+//                   steps {
+                  a:{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
-                    }
+//                     }
                   }
-                stage('two') {
-                  steps {
+//                 stage('two') {
+//                   steps {
+                      b:{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
+                      }?
                     }         
                   }
-                stage('three') {
-                  steps {
+//                 stage('three') {
+//                   steps {
+            c:{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
+//                       }
                     }         
                   }
                 }
