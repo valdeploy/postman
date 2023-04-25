@@ -3,9 +3,7 @@ pipeline {
     tools {
         jdk 'java17'
     }
-    parameters {
-            choice(name: 'project', choices: ['bloom', 'login'], defaultValue: 'bloom')
-        }
+    parameters { project(name: 'project', defaultValue: 'bloom', choices: ['bloom', 'login'], description: '') }
     stages {
          stage('Clean Workspace'){
         steps {
