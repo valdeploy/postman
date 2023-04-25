@@ -23,8 +23,7 @@ pipeline {
                     bat "npx newman -v"
                     bat "npm install newman-reporter-allure"
                     bat "npm install newman-reporter-htmlextra"
-                     echo  ${parameters.project}
-                                 echo  ${project}
+                    echo  ${project}
 
 
                 script {
