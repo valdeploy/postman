@@ -26,13 +26,6 @@ pipeline {
         }
       }
       stage('Test ${project}'){
-              while (!'all' in "${project}") {
-                  echo "single"
-                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
-                  }
-          while ('all' in "${project}") {
           steps {
               script {
                   def tests = [:]
@@ -48,7 +41,6 @@ pipeline {
                   parallel tests
               }
           }
-      }
       }
       stage('Allure Report') {
         steps {
