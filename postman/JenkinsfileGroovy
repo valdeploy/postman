@@ -33,7 +33,6 @@ pipeline {
                       }
                   }
       }
-    }
       while ('all' in "${project}") {
       stage('Test all') {
           steps {
@@ -62,4 +61,3 @@ pipeline {
         }
       }       
     }
-}
