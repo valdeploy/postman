@@ -29,18 +29,22 @@ pipeline {
           steps {
               script {
                   if ('all' in "${project}") {
-
                   def tests = [:]
                   for (f in findFiles(glob: '**postman/*/*.json')) {
                       tests["${f}"] = {
                               stage("${f}") {
                                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                  bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                                  bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${f}.html"
                               }
                               }
                       }
                   }
                   parallel tests}
+                  else{
+                   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${project}htmlreport.html"
+                              }
+                  }
               }
           }
       }
