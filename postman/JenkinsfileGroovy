@@ -25,7 +25,7 @@ pipeline {
           bat "npm install newman-reporter-htmlextra"
         }
       }
-      stage("Test ${project}"){
+      stage('Testing...'){
           steps {
               script {
                   if ('all' in "${project}") {
