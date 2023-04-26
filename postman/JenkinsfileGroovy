@@ -33,7 +33,7 @@ pipeline {
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}"
                           def v = n.replaceAll("\\\\", " ")
-                          echo v[(v.length 1)】
+                          echo v[(v.length-2)】
              
                           stage("${f}") {
                           tests["${f}"] = {
