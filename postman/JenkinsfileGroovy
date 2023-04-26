@@ -36,14 +36,9 @@ pipeline {
                           tests["${f}"] = {
                                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                       bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${f}.html"
-                                  }
-                                  stage('Allure Report') {
-        steps {
-          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report-'+n[8..13], results: [[path: 'allure-results']]
-            }
-          }
-        }
+
+}
                               }
                           }
                       }
@@ -52,14 +47,10 @@ pipeline {
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${project}.html"
-                        }
-                        stage('Allure Report') {
-        steps {
-          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-            }
-          }
-        }
+
+}
+
                   }
               }
           }
