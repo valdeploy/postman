@@ -28,6 +28,7 @@ pipeline {
       stage('Test ${project}'){
           steps {
               while ('all' in "${project}") {
+               steps {
               script {
                   def tests = [:]
                   for (f in findFiles(glob: '**postman/*/*.json')) {
@@ -41,6 +42,7 @@ pipeline {
                   }
                   parallel tests
               }
+          }
           }
           }
       }
