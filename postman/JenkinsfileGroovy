@@ -35,7 +35,7 @@ pipeline {
                           def v = n.replaceAll("\\\\", " ")
                           echo v[8..13]
              
-                          stage("${f}") {
+                          stage(v[8..13]) {
                           tests["${f}"] = {
                                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                       bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${f}.html"
