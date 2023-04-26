@@ -25,43 +25,25 @@ pipeline {
           bat "npm install newman-reporter-htmlextra"
         }
       }
-      stage('Tests') {
-        // steps {
-             while ('all' in "${project}") {
-                 echo "parallel"
-               parallel {
-                stage('one') {
-                  steps {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
+     stage('Test') {
+            steps {
+                script {
+                    def tests = [:]
+                    for (f in findFiles(glob: '**/*.json')) {
+                        // Create temp variable, otherwise the name will be the last value of the for loop
+                        def name = f
+                        //tests["${name}"] = {
+                          //  build job: "${name}"
+                       // }
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        tests["${name}"] = {
+                      bat "npx newman run "$name" --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                      }}
                     }
-                  }
-                stage('two') {
-                  steps {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
-                    }         
-                  }
-                stage('three') {
-                  steps {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
-                    }         
-                  }
-                 }
-              }
-              
-             while (!'all' in "${project}") {
-                  echo "single"
-                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }
-                  }
-          // }
-        }
+                    parallel tests
+                }
+            }
+        }    
       stage('Allure Report') {
         steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
