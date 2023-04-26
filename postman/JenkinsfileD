@@ -6,51 +6,15 @@ pipeline {
     parameters {
       choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
     }
+    def files = findFiles(glob: '**/*.json')
+    echo files
     stages {
       stage('Clean Workspace'){
         steps {
           cleanWs()
         }
       }
-      stage ('Checkout') {
-        steps {
-          checkout scm
-        }
-      }
-      stage('Install Newman') {
-        steps {
-          bat "npm install newman"
-          bat "npx newman -v"
-          bat "npm install newman-reporter-allure"
-          bat "npm install newman-reporter-htmlextra"
-        }
-      }
-     stage('Test') {
-            steps {
-                script {
-                    def tests = [:]
-                    for (f in findFiles(glob: '**/*.json')) {
-                        // Create temp variable, otherwise the name will be the last value of the for loop
-                        def name = f
-                        //tests["${name}"] = {
-                          //  build job: "${name}"
-                       // }
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        tests["${name}"] = {
-                      bat "npx newman run "$name" --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                      }}
-                    }
-                    parallel tests
-                }
-            }
-        }    
-      stage('Allure Report') {
-        steps {
-          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-            }
-          }
-        }
+      
       }
     }
   
