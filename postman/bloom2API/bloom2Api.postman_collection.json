@@ -1,1 +1,117 @@
-
+{
+	"info": {
+		"_postman_id": "3aae33e2-d624-441b-ad7a-07f879a56f79",
+		"name": "0test2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Fetches a resource list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"list of users fetched\")",
+							"pm.test(\"Verify Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"console.log(\"Response code is : \" + pm.response.code)",
+							"",
+							"",
+							"pm.test(\"Verify staus is OK\",()=> {",
+							"    pm.expect(\"OK\").eql(pm.response.status)",
+							"})",
+							"",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"pm.test(\"cookies is empty\", () => {",
+							"  pm.expect(pm.cookies.has('')).to.be.false;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/{{resource}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"{{resource}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://reqres.in"
+		},
+		{
+			"key": "username",
+			"value": "admin",
+			"type": "default"
+		},
+		{
+			"key": "myJob",
+			"value": "first",
+			"type": "default"
+		},
+		{
+			"key": "id",
+			"value": "196",
+			"type": "default"
+		},
+		{
+			"key": "resource",
+			"value": "unknown",
+			"type": "default"
+		},
+		{
+			"key": "email",
+			"value": "eve.holt@reqres.in",
+			"type": "default"
+		},
+		{
+			"key": "password",
+			"value": "pistol",
+			"type": "default"
+		},
+		{
+			"key": "token",
+			"value": "QpwL5tke4Pnpja7X4",
+			"type": "default"
+		}
+	]
+}
