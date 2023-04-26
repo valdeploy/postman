@@ -1,3 +1,4 @@
+def files = findFiles(glob: '**/*.json')
 pipeline {
     agent any
     tools {
@@ -6,7 +7,6 @@ pipeline {
     parameters {
       choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
     }
-    def files = findFiles(glob: '**/*.json')
     echo files
     stages {
       stage('Clean Workspace'){
