@@ -1,28 +1,74 @@
 pipeline {
-  agent any
-  stages {
-    stage('Clean Workspace'){
-      steps {
-        cleanWs()
+    agent any
+    tools {
+      jdk 'java17'
+    }
+    parameters {
+      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
+    }
+    stages {
+      stage('Clean Workspace'){
+        steps {
+          cleanWs()
+        }
+      }
+      stage ('Checkout') {
+        steps {
+          checkout scm
+        }
+      }
+      stage('Install Newman') {
+        steps {
+          bat "npm install newman"
+          bat "npx newman -v"
+          bat "npm install newman-reporter-allure"
+          bat "npm install newman-reporter-htmlextra"
+        }
+      }
+      stage('Tests') {
+        steps {
+             while ('all' in "${project}") {
+                 echo "parallel"
+               parallel {
+                stage('one') {
+                  steps {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                      bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                      }
+                    }
+                  }
+                stage('two') {
+                  steps {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                      bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                      }
+                    }         
+                  }
+                stage('three') {
+                  steps {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                      bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                      }
+                    }         
+                  }
+                 }
+              }
+              
+             while (!'all' in "${project}") {
+                  echo "single"
+                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                      bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                      }
+                  }
+          }
+        }
+      stage('Allure Report') {
+        steps {
+          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
+            }
+          }
+        }
       }
     }
-    stage ('Checkout') {
-      steps {
-        checkout scm
-      }
-    }          
-    stage('Testing...') {
-    agent{
-        docker{
-          image 'postman/newman:latest'
-          reuseNode true}
-
-      }
-      steps{
-        bat 'npm -v'
-       // bat 'sudo usermod -a -G docker jenkins'
-       // bat 'npm install newman'
-      }
-    }
-  }
-}
+  
