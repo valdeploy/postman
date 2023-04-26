@@ -32,7 +32,7 @@ pipeline {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}"
-                          def v = n.split("\")
+                          def v = n.split("/")
              
                           stage(v[1]) {
                           tests["${f}"] = {
