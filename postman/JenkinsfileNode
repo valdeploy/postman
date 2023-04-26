@@ -9,7 +9,7 @@ agent any
                         // Create temp variable, otherwise the name will be the last value of the for loop
                         def name = f
                         tests["${name}"] = {
-                           stage(["${name}"){
+                           stage("${name}"){
                             build job: "${name}"
                         }
                         }
