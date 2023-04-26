@@ -1,4 +1,5 @@
 def files = findFiles(glob: '**/*.json')
+echo files
 pipeline {
     agent any
     tools {
