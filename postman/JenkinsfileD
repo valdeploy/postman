@@ -26,7 +26,7 @@ pipeline {
         }
       }
       stage('Tests') {
-        steps {
+        // steps {
              while ('all' in "${project}") {
                  echo "parallel"
                parallel {
@@ -60,7 +60,7 @@ pipeline {
                       bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                       }
                   }
-          }
+          // }
         }
       stage('Allure Report') {
         steps {
