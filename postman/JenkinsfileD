@@ -15,10 +15,11 @@ pipeline {
       stage ('Checkout') {
         steps {
           checkout scm
+          def files = findFiles(glob: 'postman/*/*.json')
+      echo files
         }
       }
-      def files = findFiles(glob: 'postman/*/*.json')
-      echo files
+      
 
         }
       }
