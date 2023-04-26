@@ -34,7 +34,7 @@ pipeline {
                           def n = "${f}"
                           echo n
                           def v = n.replaceAll("\\\\", " ")
-                          echo v[1]
+                          echo v
              
                           stage("${f}") {
                           tests["${f}"] = {
