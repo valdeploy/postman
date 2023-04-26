@@ -31,12 +31,12 @@ pipeline {
                     def tests = [:]
                     for (f in findFiles(glob: '**postman/*/*.json')) {
                         tests["${f}"] = {
-                            node {
+                            //node {
                                 stage("${f}") {
                                     bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
                                     echo '${f}'
                                 }
-                            }
+                            //}
                         }
                     }
                     parallel tests
