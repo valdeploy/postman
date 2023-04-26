@@ -8,8 +8,8 @@ agent any
                     for (f in findFiles(glob: '**/html/*.html')) {
                         // Create temp variable, otherwise the name will be the last value of the for loop
                         def name = f
-                        stage(["${name}"){
                         tests["${name}"] = {
+                           stage(["${name}"){
                             build job: "${name}"
                         }
                         }
