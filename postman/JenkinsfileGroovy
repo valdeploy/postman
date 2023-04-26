@@ -27,9 +27,9 @@ pipeline {
       }
       stage('Test ${project}'){
           steps {
-              while ('all' in "${project}") {
-               steps {
               script {
+                  if ('all' in "${project}") {
+
                   def tests = [:]
                   for (f in findFiles(glob: '**postman/*/*.json')) {
                       tests["${f}"] = {
@@ -40,10 +40,8 @@ pipeline {
                               }
                       }
                   }
-                  parallel tests
+                  parallel tests}
               }
-          }
-          }
           }
       }
       stage('Allure Report') {
