@@ -25,23 +25,41 @@ pipeline {
           bat "npm install newman-reporter-htmlextra"
         }
       }
-        stage('1') {
-            steps {
-                script {
-                    def tests = [:]
-                    for (f in findFiles(glob: '**postman/*/*.json')) {
-                        tests["${f}"] = {
-                            //node {
-                                stage("${f}") {
-                                    bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
-                                    echo '${f}'
-                                }
-                            //}
-                        }
-                    }
-                    parallel tests
-                }
+      while (!'all' in "${project}") {
+      stage('Test ${project}'){
+                  echo "single"
+                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                      bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                      }
+                  }
+      }
+    }
+      while ('all' in "${project}") {
+      stage('Test all') {
+          steps {
+              script {
+                  def tests = [:]
+                  for (f in findFiles(glob: '**postman/*/*.json')) {
+                      tests["${f}"] = {
+                              stage("${f}") {
+                                  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                  bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/bloomAPI1htmlreport.html"
+                              }
+                              }
+                      }
+                  }
+                  parallel tests
+              }
+          }
+      }
+      }
+      stage('Allure Report') {
+        steps {
+          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
             }
-        }       
+          }
+        }
+      }       
     }
 }
