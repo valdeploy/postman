@@ -26,9 +26,9 @@ pipeline {
         }
       }
       stage('Tests') {
-        steps {
              while ('all' in "${project}") {
-                 echo "parallel"
+                              echo "parallel"
+              steps {
                parallel {
                 stage('one') {
                   steps {
