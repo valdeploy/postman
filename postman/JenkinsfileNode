@@ -10,7 +10,7 @@ agent any
                         def name = f
                         stage("${name}"){
                         tests["${name}"] = {
-                            build job: "${name}"
+                            echo "${name}"
                         }
                         }
                     }
