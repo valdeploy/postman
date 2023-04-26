@@ -1,17 +1,30 @@
-pipeline{
-  agent any
-  stages{
-    stage('checkout') {
-    checkout scm
-  }
-  stage('Test') {
-    script {
-      try {
-      withDockerContainer("postman/newman:alpine"){
-      sh 'newman run postman/test.postman_collection.json'
-      }
-    }
-    catch(e) {}
+pipeline {
+  stages {
+    stage("Parallel") {
+      steps {
+        script {
+          def list = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa"]
+
+          // Split the list into batches of 4
+          def parallelBatches = list.collate(4);
+          // [["alpha", "beta", "gamma", "delta"], ["epsilon", "zeta", "eta", "theta"], ["iota", "kappa"]]
+
+          // This allows to run a maximum of 4 tasks in parallel (at once)
+          for (parallelBatch in parallelBatches) {
+            def tasks = [:]
+
+            for (task in parallelBatch) {
+              tasks["${task}"] = {
+                stage("${task}") {
+                  echo '${task}'
+                }
+              }
+            }
+            parallel tasks
+
+            // Once the batch is over, the outer loop move onto the next batch
+          }
+        }
       }
     }
   }
