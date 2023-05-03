@@ -4,9 +4,9 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'execution_type', choices: ['single','all', 'parallel'], description: 'Execution type')
-      booleanParam(name: 'parallel', defaultValue: true, description: 'Parallel')
-      choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: 'Project')
+      choice(name: 'Execution type', choices: ['single','all', 'parallel'], description: '')
+      booleanParam(name: 'Parallel', defaultValue: true, description: '')
+      choice(name: 'Project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
     }
     stages {
       stage('Clean Workspace'){
