@@ -39,8 +39,8 @@ pipeline {
                                   }
                               }
                           }
-                      }
-                      parallel tests
+                      }                  
+                      if ('parallel' in "${project}") {parallel tests}
                   }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
