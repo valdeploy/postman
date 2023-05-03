@@ -4,7 +4,7 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
+      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all', 'parallel'], description: '')
     }
     stages {
       stage('Clean Workspace'){
@@ -29,6 +29,19 @@ pipeline {
           steps {
               script {
                   if ('all' in "${project}") {
+                      def tests = [:]
+                      for (f in findFiles(glob: '**postman/*/*.json')) {
+                          def n = "${f}".replaceAll("\\\\", " ")
+                          stage(n[8..13]) {
+                          tests["${f}"] = {
+                                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                      bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/n[8..13]_API.html"
+                                  }
+                              }
+                          }
+                      }
+                  }
+                   else if ('parallel' in "${project}") {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
