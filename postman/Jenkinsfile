@@ -4,7 +4,7 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all', 'parallel'], description: '')
+      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
     }
     stages {
       stage('Clean Workspace'){
@@ -22,13 +22,12 @@ pipeline {
           bat "npm install newman"
           bat "npx newman -v"
           bat "npm install newman-reporter-allure"
-          bat "npm install newman-reporter-htmlextra"
         }
       }
       stage('Testing...'){
           steps {
               script {
-                  if ('all' in "${project}" || 'parallel' in "${project}") {
+                  if ('all' in "${project}") {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
@@ -40,7 +39,7 @@ pipeline {
                               }
                           }
                       }                  
-                      while ('parallel' in "${project}") {parallel tests}
+                   
                   }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
