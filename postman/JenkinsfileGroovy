@@ -4,7 +4,7 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'execution', choices: ['single','all', 'parallel'], description: '')
+      choice(name: 'execution', choices: ['single','all'], description: '')
       booleanParam(name: 'parallel', defaultValue: false, description: '')
       choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
     }
