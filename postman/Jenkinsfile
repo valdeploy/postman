@@ -28,7 +28,7 @@ pipeline {
       stage('Testing...'){
           steps {
               script {
-                  if ('all' in "${project}") {
+                  if ('all' in "${project}" || 'parallel' in "${project}") {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
