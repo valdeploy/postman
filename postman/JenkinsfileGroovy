@@ -4,9 +4,9 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'ExecutionType', choices: ['single','all', 'parallel'], description: '')
-      booleanParam(name: 'Parallel', defaultValue: false, description: '')
-      choice(name: 'Project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
+      choice(name: 'execution', choices: ['single','all', 'parallel'], description: '')
+      booleanParam(name: 'parallel', defaultValue: false, description: '')
+      choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
     }
     stages {
       stage('Clean Workspace'){
@@ -29,7 +29,7 @@ pipeline {
       stage('Testing...'){
           steps {
               script {                       
-                if ('all' in "${ExecutionType}") {
+                if ('all' in "${execution}") {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
@@ -41,13 +41,13 @@ pipeline {
                               }
                           }
                       }
-                       if ('Parallel'==true) {
+                       if ('parallel'==true) {
                       parallel tests
                       }
                   }
-                  if('single' in "${ExecutionType}") {
+                  if('single' in "${execution}") {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "npx newman run postman/${Project}API/${Project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                        bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
                         }
                   }
               }
