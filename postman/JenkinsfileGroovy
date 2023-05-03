@@ -4,7 +4,7 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-          choice(name: 'execution_type', choices: ['single','all', 'parallel'], description: 'Execution type')
+      choice(name: 'execution_type', choices: ['single','all', 'parallel'], description: 'Execution type')
       choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
     }
     stages {
@@ -28,8 +28,8 @@ pipeline {
       }
       stage('Testing...'){
           steps {
-              script {                       if ('all' in "${execution_type}") {
-
+              script {                       
+                if ('all' in "${execution_type}") {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
@@ -45,8 +45,7 @@ pipeline {
                       parallel tests
                       }
                   }
-       
-                  else{
+                  if('single' in "${execution_type}") {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
                         }
