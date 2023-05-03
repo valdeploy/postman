@@ -4,7 +4,7 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
+      choice(name: 'project', choices: ['all', 'parallel', 'ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
     }
     stages {
       stage('Clean Workspace'){
@@ -28,33 +28,46 @@ pipeline {
       stage('Testing...'){
           steps {
               script {
-                  if ('all' in "${project}") {
+                  if ('parallel' in "${project}") {
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
                           stage(n[8..13]) {
                           tests["${f}"] = {
                                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                      bat "npx newman run ${f} --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${f}.html"
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report-'+n[8..13], results: [[path: 'allure-results']]
-
-}
+                                      bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results"
+                                  }
                               }
                           }
                       }
                       parallel tests
                   }
+                  else if ('all' in "${project}") {
+                    bat "npx newman run postman/ardorAPI/ardorApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/babouAPI/babouApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/erosAPI/erosApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/marsAPI/marsApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/mercuryAPI/mercuryApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/rosettaAPI/rosettaApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/segmentAPI/segmentApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/vestaAPI/vestaApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                    bat "npx newman run postman/zealAPI/zealApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                  }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${project}.html"
-            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-
-}
-
+                        }
                   }
               }
           }
       }
-      
+      stage('Allure Report') {
+        steps {
+          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
+            }
+          }
+        }
       }
     }
