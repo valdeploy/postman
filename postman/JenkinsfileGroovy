@@ -4,7 +4,8 @@ pipeline {
       jdk 'java17'
     }
     parameters {
-      choice(name: 'project', choices: ['all', 'parallel', 'ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
+          choice(name: 'execution_type', choices: ['all', 'parallel'], description: 'Execution type')
+      choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
     }
     stages {
       stage('Clean Workspace'){
@@ -27,7 +28,7 @@ pipeline {
       }
       stage('Testing...'){
           steps {
-              script {                       if ('all' in "${project}") {
+              script {                       if ('all' in "${execution_type}") {
 
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
@@ -40,7 +41,7 @@ pipeline {
                               }
                           }
                       }
-                       if ('parallel' in "${project}") {
+                       if ('parallel' in "${execution_type}") {
                       parallel tests
                       }
                   }
