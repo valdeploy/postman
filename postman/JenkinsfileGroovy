@@ -5,7 +5,8 @@ pipeline {
     }
     parameters {
       choice(name: 'execution_type', choices: ['single','all', 'parallel'], description: 'Execution type')
-      choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: '')
+      booleanParam(name: 'parallel', defaultValue: true, description: 'Parallel')
+      choice(name: 'project', choices: ['ardor', 'audit', 'babou', 'bloom', 'eros', 'gaia', 'hyperion', 'login','janus', 'kratos', 'mars', 'mercury', 'neptune', 'phobos', 'rosetta', 'segment', 'semaphore','tailor', 'vesta', 'vulcan','sirius', 'zeal'], description: 'Project')
     }
     stages {
       stage('Clean Workspace'){
@@ -23,7 +24,6 @@ pipeline {
           bat "npm install newman"
           bat "npx newman -v"
           bat "npm install newman-reporter-allure"
-          bat "npm install newman-reporter-htmlextra"
         }
       }
       stage('Testing...'){
@@ -41,7 +41,7 @@ pipeline {
                               }
                           }
                       }
-                       if ('parallel' in "${execution_type}") {
+                       if ('parallel'==true) {
                       parallel tests
                       }
                   }
