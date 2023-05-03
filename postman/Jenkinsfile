@@ -40,7 +40,7 @@ pipeline {
                               }
                           }
                       }
-                      parallel tests
+                      tests
                   }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
