@@ -28,7 +28,7 @@ pipeline {
       stage('Testing...'){
           steps {
               script {
-                  if ('parallel' in "${project}") {
+                 
                       def tests = [:]
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
@@ -40,21 +40,11 @@ pipeline {
                               }
                           }
                       }
+                       if ('parallel' in "${project}") {
                       parallel tests
-                  }
-                  else if ('all' in "${project}") {
-                      def tests = [:]
-                      for (f in findFiles(glob: '**postman/*/*.json')) {
-                          def n = "${f}".replaceAll("\\\\", " ")
-                          stage(n[8..13]) {
-                          tests["${f}"] = {
-                                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                                      bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results"
-                                  }
-                              }
-                          }
                       }
                   }
+       
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
