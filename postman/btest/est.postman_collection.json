@@ -6,7 +6,54 @@
 	},
 	"item": [
 		{
-			"name": "Fetches a resource list",
+			"name": "2 =====Fetches a resource list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(\"list of users fetched\")",
+							"pm.test(\"Verify Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"console.log(\"Response code is : \" + pm.response.code)",
+							"",
+							"",
+							"pm.test(\"Verify staus is OK\",()=> {",
+							"    pm.expect(\"OK\").eql(pm.response.status)",
+							"})",
+							"",
+							"",
+							"pm.test(\"Response time is less than 1000ms\", () => {",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"pm.test(\"cookies is empty\", () => {",
+							"  pm.expect(pm.cookies.has('')).to.be.false;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/{{resource}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"{{resource}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 =====Fetches a resource list",
 			"event": [
 				{
 					"listen": "test",
