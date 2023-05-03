@@ -38,7 +38,8 @@ pipeline {
                                   }
                               }
                           }
-                      }                  
+                      }
+                      parallel tests
                   }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
