@@ -43,20 +43,21 @@ pipeline {
                       parallel tests
                   }
                   else if ('all' in "${project}") {
-                    bat "npx newman run postman/ardorAPI/ardorApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/babouAPI/babouApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/bloomAPI/bloomApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/erosAPI/erosApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/marsAPI/marsApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/mercuryAPI/mercuryApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/rosettaAPI/rosettaApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/segmentAPI/segmentApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/vestaAPI/vestaApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
-                    bat "npx newman run postman/zealAPI/zealApi.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                      def tests = [:]
+                      for (f in findFiles(glob: '**postman/*/*.json')) {
+                          def n = "${f}".replaceAll("\\\\", " ")
+                          stage(n[8..13]) {
+                          tests["${f}"] = {
+                                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                      bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results"
+                                  }
+                              }
+                          }
+                      }
                   }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure,htmlextra --reporter-allure-export allure-results --reporter-htmlextra-export reports/${project}.html"
+                        bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
                         }
                   }
               }
