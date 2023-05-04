@@ -1,4 +1,5 @@
-node('docker') {
+pipeline {
+    agent any
     stage('unit test') {
         parallel([
             hello: {
