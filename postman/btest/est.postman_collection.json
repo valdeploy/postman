@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "2 =====Fetches a resource list",
+			"name": "2 =EST",
 			"event": [
 				{
 					"listen": "test",
@@ -53,7 +53,7 @@
 			"response": []
 		},
 		{
-			"name": "3 =====Fetches a resource list",
+			"name": "3 ==EST",
 			"event": [
 				{
 					"listen": "test",
