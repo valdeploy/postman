@@ -39,6 +39,7 @@ pipeline {
                                   }
                               }
                           }
+                          parallel tests
                       }
                   }
                   else{
@@ -46,15 +47,16 @@ pipeline {
                         bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
                         }
                   }
-              }
-          }
-      }
-      stage('Allure Report') {
+                   stage('Allure Report') {
         steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
             }
           }
         }
+              }
+          }
+      }
+     
       }
     }
