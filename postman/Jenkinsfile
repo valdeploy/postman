@@ -32,15 +32,14 @@ pipeline {
                       for (f in findFiles(glob: '**postman/*/*.json')) {
                           def n = "${f}".replaceAll("\\\\", " ")
                           stage(n[8..13]) {
-                              echo "${f}"
                           tests["${f}"] = {
                                       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                                       bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results"
                                   }
                               }
                           }
-                          parallel tests
-                      }
+                          
+                      }parallel tests
                   }
                   else{
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
