@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+     tools {
+      jdk 'java17'
+    }
+    parameters {
+      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
+    }
+    stages {
+      stage('Clean Workspace'){
+        steps {
+          cleanWs()
+        }
+      }
+      stage ('Checkout') {
+        steps {
+          checkout scm
+        }
+      }
+      stage('Install Newman') {
+        steps {
+          bat "npm install newman"
+          bat "npx newman -v"
+          bat "npm install newman-reporter-allure"
+        }
+      }
+    stage('unit test') {
+        parallel([
+            hello: {
+                echo "hello"
+            },
+            world: {
+                echo "world"
+            }
+        ])
+    }
+
+    stage('build') {
+        def stages = [:]
+
+        stages["mac"] = {
+            echo "build for mac"
+        }
+        stages["linux"] = {
+            echo "build for linux"
+        }
+
+        parallel(stages)
+    }
+}
