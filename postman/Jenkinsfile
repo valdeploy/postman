@@ -37,8 +37,8 @@ pipeline {
                                           bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results"
                                       }
                                   }
-                               parallel tests
-                              }
+                            }
+                          parallel tests
                       }
                   }
                   else{
