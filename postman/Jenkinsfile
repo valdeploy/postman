@@ -24,7 +24,8 @@ pipeline {
           bat "npm install newman-reporter-allure"
         }
       }
-     
+       stage("") {
+
               script {
                   if ('all' in "${project}") {
                       def tests = [:]
@@ -49,7 +50,7 @@ pipeline {
                    stage('Allure Report') {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-            
+          }
 
               }
           }
