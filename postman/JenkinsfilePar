@@ -1,29 +1,4 @@
-pipeline {
-    agent any
-     tools {
-      jdk 'java17'
-    }
-    parameters {
-      choice(name: 'project', choices: ['bloom', 'login', 'ardor', 'babou', 'eros', 'mars', 'mercury', 'rosetta', 'segment', 'vesta', 'all'], description: '')
-    }
-    stages {
-      stage('Clean Workspace'){
-        steps {
-          cleanWs()
-        }
-      }
-      stage ('Checkout') {
-        steps {
-          checkout scm
-        }
-      }
-      stage('Install Newman') {
-        steps {
-          bat "npm install newman"
-          bat "npx newman -v"
-          bat "npm install newman-reporter-allure"
-        }
-      }
+node('docker') {
     stage('unit test') {
         parallel([
             hello: {
@@ -47,5 +22,4 @@ pipeline {
 
         parallel(stages)
     }
-}
 }
