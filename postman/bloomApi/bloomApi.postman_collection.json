@@ -53,7 +53,7 @@
 			"response": []
 		},
 		{
-			"name": "1.Update list",
+			"name": "2.Update list",
 			"event": [
 				{
 					"listen": "test",
