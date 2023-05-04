@@ -48,10 +48,9 @@ pipeline {
                         }
                   }
                    stage('Allure Report') {
-        steps {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             allure includeProperties: false, jdk: 'java17', report: 'reports/allure-report', results: [[path: 'allure-results']]
-            }
+            
           }
         }
               }
