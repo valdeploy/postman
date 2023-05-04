@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "3 New API",
+			"name": "4 New API",
 			"event": [
 				{
 					"listen": "test",
@@ -53,7 +53,7 @@
 			"response": []
 		},
 		{
-			"name": "3.Update coll",
+			"name": "5.Update coll",
 			"event": [
 				{
 					"listen": "test",
