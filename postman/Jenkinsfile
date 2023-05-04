@@ -24,7 +24,7 @@ pipeline {
           bat "npm install newman-reporter-allure"
         }
       }
-       stage("") {
+       stage("Testing...") {
            steps{
               script {
                   if ('all') {
