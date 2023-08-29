@@ -22,7 +22,7 @@ agent any
     }
     stage ('Install k6') {
       steps {
-        'npx docker-compose run -v $PWD/tests:/tests k6 run --http-debug='full' k6.js --insecure-skip-tls-verify'
+        bat "npm docker-compose run -v $PWD/tests:/tests k6 run --http-debug='full' k6.js --insecure-skip-tls-verify"
       }
     }
     stage ('Run tests k6') {
