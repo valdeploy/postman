@@ -1,7 +1,7 @@
 import http from 'k6/http';
 
 export const options = {
-  duration: '1s',
+  duration: '1m',
   vus: 1,
   thresholds: {
     http_req_duration: ['p(95)<500'],
