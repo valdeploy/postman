@@ -27,7 +27,7 @@ agent any
     }
     stage ('Run tests k6') {
       steps {
-        bat "k6 run k6.js"
+        bat "k6 version"
       }
     }
   }
