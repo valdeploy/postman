@@ -22,7 +22,7 @@ agent any
     }
     stage ('Install k6') {
       steps {
-        docker-compose up -d influxdb grafana
+        bat "docker-compose up -d influxdb grafana"
       }
     }
   }
