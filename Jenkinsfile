@@ -22,7 +22,11 @@ agent any
     }
     stage ('Install k6') {
       steps {
-        bat "npm i k6"
+        echo 'Installing k6'
+                sh 'sudo chmod +x setup_k6.sh'
+                sh 'sudo ./setup_k6.sh'
+                echo 'Running K6 performance tests...'
+                sh 'k6 run loadtests/performance-test.js'
       }
     }
     stage ('Run tests k6') {
