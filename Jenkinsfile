@@ -22,11 +22,7 @@ agent any
     }
     stage ('Install k6') {
       steps {
-        echo 'Installing k6'
-                bat 'sudo chmod +x setup_k6.sh'
-                bat 'sudo ./setup_k6.sh'
-                echo 'Running K6 performance tests...'
-                bat 'k6 run loadtests/performance-test.js'
+        'npx docker-compose run -v $PWD/tests:/tests k6 run --http-debug='full' k6.js --insecure-skip-tls-verify'
       }
     }
     stage ('Run tests k6') {
