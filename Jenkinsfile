@@ -25,10 +25,5 @@ agent any
         bat "npm docker-compose run -v ./tests:/tests k6 run --http-debug='full' k6.js --insecure-skip-tls-verify"
       }
     }
-    stage ('Run tests k6') {
-      steps {
-        bat "k6 version"
-      }
-    }
   }
 }
