@@ -6,8 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('postman') {
-                        def subfolders = findFiles(glob: '**/')
-
+                        def subfolders = findFiles(glob: '**postman/bloomApi/*.json')
                         async.parallel(subfolders.collectEntries {
                             ["${it.name}" : {
                                 stage("${it.name}") {
