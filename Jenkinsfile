@@ -26,19 +26,19 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Generate consolidated Allure report
-            sh 'allure generate allure-results-combined --clean'
+    // post {
+    //     always {
+    //         // Generate consolidated Allure report
+    //         sh 'allure generate allure-results-combined --clean'
 
-            // Publish the consolidated report
-            allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results-combined']]
-            ])
-        }
-    }
+    //         // Publish the consolidated report
+    //         allure([
+    //             includeProperties: false,
+    //             jdk: '',
+    //             properties: [],
+    //             reportBuildPolicy: 'ALWAYS',
+    //             results: [[path: 'allure-results-combined']]
+    //         ])
+    //     }
+    // }
 }
