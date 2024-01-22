@@ -2,7 +2,6 @@ pipeline {
     agent any
       tools {
         gradle 'gradle'
-        //jdk 'java17'
     }
     stages {
         stage('Iterate Subfolders and Run Newman with Allure') {
@@ -10,25 +9,11 @@ pipeline {
                 script {
                     dir('postman') {
                         def subfolders = findFiles(glob: '**postman/bloomApi/*.json')
-                        async.parallel(subfolders.collectEntries {
-                            ["${it.name}" : {
-                                stage("${it.name}") {
-                                    dir(it.name) {
-                                        // Generate Allure results for Newman run
-                                        //bat 'newman run test.postman_collection.json -e env.json --reporters cli,allure'
-
-                                        // Move Allure results to a common directory
-                                        //bat 'mv allure-results/* ../allure-results-combined'
-                                    }
-                                }
-                            }]
-                        })
                     }
                 }
             }
         }
-    }
-          stage('Notify Teams') {
+        stage('Notify Teams') {
           steps {
             script {
               def teamsWebhookUrl = 'https://asicentralcom.webhook.office.com/webhookb2/fb9be2cb-8ac8-4002-957a-8db7c6927372@6504f7e4-d6a1-4688-bf1e-e77e27af6d9a/IncomingWebhook/450b1cbc6bd94699846a5261a5d3f7c9/ac33b688-2060-4767-9ad9-164963554b18'
@@ -61,20 +46,4 @@ pipeline {
           }
       }
     }
-
-    // post {
-    //     always {
-    //         // Generate consolidated Allure report
-    //         sh 'allure generate allure-results-combined --clean'
-
-    //         // Publish the consolidated report
-    //         allure([
-    //             includeProperties: false,
-    //             jdk: '',
-    //             properties: [],
-    //             reportBuildPolicy: 'ALWAYS',
-    //             results: [[path: 'allure-results-combined']]
-    //         ])
-    //     }
-    // }
-//}
+}
