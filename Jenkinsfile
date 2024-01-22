@@ -2,7 +2,7 @@ pipeline {
     agent any
       tools {
         gradle 'gradle'
-        jdk 'java17'
+        //jdk 'java17'
     }
     stages {
         stage('Iterate Subfolders and Run Newman with Allure') {
