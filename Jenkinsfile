@@ -31,14 +31,13 @@ pipeline {
                       'targets': [
                           [
                             'os': 'default',
-                            'uri': 'https://jenkins.asicentral.com/job/asi/job/postman-testing/job/fix%252FQAA-585-Fix-Zeus-APIs-tests/23/console'
+                            'uri': ''
                           ],
                     ]
                 ],
               ]
               ]
-              bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}""", returnOutput: true
-
+              bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"""
               //def payloadJson = groovy.json.JsonOutput.toJson(payload)
               //bat "echo '${payload}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
   //            bat "curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"
