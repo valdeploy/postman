@@ -37,11 +37,14 @@ pipeline {
       }
    ]
 }"""
-              def payloadJson = groovy.json.JsonOutput.toJson(p)
+            //  def payloadJson = groovy.json.JsonOutput.toJson(p)
             //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"""
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
               // bat "curl -X POST -H 'Content-Type: application/json' -d '${p}' ${teamsWebhookUrl}"
-                bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data '{\r\n   \"type\":\"message\",\r\n   \"attachments\":[\r\n      {\r\n         \"contentType\":\"application/vnd.microsoft.card.adaptive\",\r\n         \"contentUrl\":null,\r\n         \"content\":{\r\n            \"type\":\"AdaptiveCard\",\r\n            \"version\":\"1.2\",\r\n            \"body\":[\r\n                {\r\n                \"type\": \"TextBlock\",\r\n                \"text\": \"For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)\"\r\n                }\r\n            ]\r\n         }\r\n      }\r\n   ]\r\n}'"
+             //   bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data ''"
+                bat "curl --location --request POST ${teamsWebhookUrl} \\\n" +
+              "--header 'Content-Type: application/json' \\\n" +
+              "--data-raw ${p}"
 
             }
           }
