@@ -9,7 +9,7 @@ pipeline {
                   def n = "${f}".replaceAll("\\\\", " ")
                   stage(n[8..13]) {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run ${f}     
+                      bat "npx newman run ${f}"    
                       }
                     }            
                  }      
