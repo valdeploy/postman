@@ -1,8 +1,8 @@
 pipeline {
     agent any
     stages {
-        def build_ok = true
         stage('Testing...'){
+                    def build_ok = true
           steps {
             try{
                 script {                       
