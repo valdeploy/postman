@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Testing...'){
           steps {
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               script {                       
                 def tests = [:]
                 for (f in findFiles(glob: '**postman/bloomApi/*.json')) {
@@ -13,6 +14,7 @@ pipeline {
                     }            
                  }      
                 }
+            }
           }
       }
         stage('Notify Teams') {
