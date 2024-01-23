@@ -137,7 +137,26 @@ pipeline {
               //bat "curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"
                 sh "curl -X POST  ${teamsWebhookUrl} \\\n" +
                  "--header 'Content-Type: application/json' \\\n" +
-                 "--data-raw '{"@type":"MessageCard","@context":"http://schema.org/extensions","themeColor":"0072C6","title":"Jenkins Build","text":"Alert","potentialAction":[{"@type":"OpenUri","name":"jenkins","targets":[{"os":"default","uri":"https://jenkins.asicentral.com/job/asi/job/postman-testing/job/fix52FQAA-585-Fix-Zeus-APIs-tests/23/console"}]}]}'"
+                 "--data-raw '{
+   "type":"message",
+   "attachments":[
+      {
+         "contentType":"application/vnd.microsoft.card.adaptive",
+         "contentUrl":null,
+         "content":{
+            "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
+            "type":"AdaptiveCard",
+            "version":"1.2",
+            "body":[
+                {
+                "type": "TextBlock",
+                "text": "For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)"
+                }
+            ]
+         }
+      }
+   ]
+}'"
             }
           }
       }
