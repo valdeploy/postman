@@ -44,7 +44,7 @@ pipeline {
              //   bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data ''"
                 bat "curl --location --request POST ${teamsWebhookUrl} \\\n" +
               "--header 'Content-Type: application/json' \\\n" +
-              "--data-raw ${p}"
+              "--data-raw ${payloadJson}"
 
             }
           }
