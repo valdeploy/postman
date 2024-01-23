@@ -37,7 +37,7 @@ pipeline {
                 ],
               ]
               ]
-                def payload ="""{
+                def payload2 ="""{
                        "@type": "MessageCard",
                        "@context": "http://schema.org/extensions",
                        "summary": "Jenkins Build Notification",
@@ -49,7 +49,7 @@ pipeline {
                            }
                        ]
                    }"""
-                def payload2 = """{
+                def payload = """{
     "@type": "MessageCard",
     "@context": "http://schema.org/extensions",
     "themeColor": "0076D7",
