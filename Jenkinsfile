@@ -157,7 +157,7 @@ pipeline {
               //bat "curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"
                 sh "curl -X POST  ${teamsWebhookUrl} \\\n" +
                  "--header 'Content-Type: application/json' \\\n" +
-                 "--data-raw '${p}'"
+                 "--data-raw '${payloadJson}'"
             }
           }
       }
