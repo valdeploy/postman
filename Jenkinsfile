@@ -49,7 +49,7 @@ pipeline {
                            }
                        ]
                    }"""
-                def payload = """{
+                def payload = {
     "@type": "MessageCard",
     "@context": "http://schema.org/extensions",
     "themeColor": "0076D7",
@@ -129,7 +129,7 @@ pipeline {
             "target": "https://learn.microsoft.com/outlook/actionable-messages"
         }]
     }]
-}"""
+}
               //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"""
               def payloadJson = groovy.json.JsonOutput.toJson(payload)
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
