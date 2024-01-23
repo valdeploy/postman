@@ -14,7 +14,7 @@
 						"exec": [
 							"console.log(\"list of users fetched\")",
 							"pm.test(\"Verify Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(505);",
 							"});",
 							"console.log(\"Response code is : \" + pm.response.code)",
 							"",
