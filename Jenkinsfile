@@ -37,7 +37,26 @@ pipeline {
                 ],
               ]
               ]
-                def payload = """{
+                def payload ="""{
+                       "@type": "MessageCard",
+                       "@context": "http://schema.org/extensions",
+                       "summary": "Jenkins Build Notification",
+                       "themeColor": "0072C6",
+                       "sections": [
+                           {
+                               "activityTitle": "Jenkins Build Status",
+                               "activitySubtitle": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Build Successful' : 'Build Failed'}",
+                               "activityImage": "https://your-company-logo-url.com/logo.png",
+                               "facts": [
+                                   {"name": "Name", "value": "${JOB_NAME}"},
+                                   {"name": "Build Number", "value": "${BUILD_NUMBER}"},
+                                   {"name": "Status", "value": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Successful' : 'Failed'}"},
+                                   {"name": "Commit", "value": "${gitCommit}"}
+                               ]
+                           }
+                       ]
+                   }"""
+                def payload2 = """{
     "@type": "MessageCard",
     "@context": "http://schema.org/extensions",
     "themeColor": "0076D7",
@@ -121,7 +140,7 @@ pipeline {
               //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"""
               def payloadJson = groovy.json.JsonOutput.toJson(payload)
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
-              bat "curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"
+              bat "curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"
             }
           }
       }
