@@ -8,7 +8,7 @@ pipeline {
             def gitCommit = env.GIT_COMMIT
             def data = """'{     "@type": "MessageCard",     "@context": "http://schema.org/extensions",     "summary": "Jenkins Build Notification",     "themeColor": "0072C6",     "sections": [         {             "activityTitle": "Jenkins Build Status",             "activitySubtitle": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Build Successful' : 'Build Failed'}",             "activityImage": "https://your-company-logo-url.com/logo.png",             "facts": [                 {"name": "Name", "value": "${JOB_NAME}"},                 {"name": "Build Number", "value": "${BUILD_NUMBER}"},                 {"name": "Status", "value": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Successful' : 'Failed'}"},                 {"name": "Commit", "value": "${gitCommit}"}             ]         }     ] }'"""
             def data1 = groovy.json.JsonOutput.toJson(data)
-            bat "curl -X POST \"${url}\" -H 'Content-Type:application/json' -d \"${data}\""
+            bat "curl -X POST \"${url}\" -H 'Content-Type:application/json' -d \"${data1}\""
             }
           }
       }
