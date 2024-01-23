@@ -137,7 +137,7 @@ pipeline {
               //bat "curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"
                 sh "curl -X POST  ${teamsWebhookUrl} \\\n" +
                  "--header 'Content-Type: application/json' \\\n" +
-                 "--data-raw '${payload}'"
+                 "--data-raw '{"@type":"MessageCard","@context":"http://schema.org/extensions","themeColor":"0072C6","title":"Jenkins Build","text":"Alert","potentialAction":[{"@type":"OpenUri","name":"jenkins","targets":[{"os":"default","uri":"https://jenkins.asicentral.com/job/asi/job/postman-testing/job/fix52FQAA-585-Fix-Zeus-APIs-tests/23/console"}]}]}'"
             }
           }
       }
