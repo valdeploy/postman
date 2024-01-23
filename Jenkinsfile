@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Testing...'){
           steps {
-            try{
                 script {                       
                 def tests = [:]
                 for (f in findFiles(glob: '**postman/bloomApi/*.json')) {
@@ -14,19 +13,10 @@ pipeline {
                     }            
                  }      
                 }
-            }
-            catch(e) {
-                                    def build_ok = true
-        build_ok = false
-        echo e.toString()  
-    }
+            
           }
       }
-    if(build_ok) {
-        currentBuild.result = "SUCCESS"
-    } else {
-        currentBuild.result = "FAILURE"
-    }
+   
         stage('Notify Teams') {
           steps {
             script {
