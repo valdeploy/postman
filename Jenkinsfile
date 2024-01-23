@@ -40,7 +40,7 @@ pipeline {
               def payloadJson = groovy.json.JsonOutput.toJson(p)
             //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"""
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
-               bat "curl -X POST -H 'Content-Type: application/json' -d ${payloadJson} ${teamsWebhookUrl}"
+               bat "curl -X POST -H 'Content-Type: application/json' -data ${payloadJson} ${teamsWebhookUrl}"
              //   bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data ''"
 
             }
