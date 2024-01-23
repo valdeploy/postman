@@ -40,9 +40,9 @@ pipeline {
               def payloadJson = groovy.json.JsonOutput.toJson(p)
             //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"""
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
-               bat "curl -X POST -H 'Content-Type: application/json' -data ${payloadJson} ${teamsWebhookUrl}"
+             //  bat "curl -X POST -H 'Content-Type: application/json' -data ${payloadJson} ${teamsWebhookUrl}"
              //   bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data ''"
-
+                bat script: """curl --header "Content-Type: application/json" --request POST --data '{     "@type": "MessageCard",     "@context": "http://schema.org/extensions",     "summary": "Jenkins Build Notification",     "themeColor": "0072C6",     "sections": [         {             "activityTitle": "Jenkins Build Status",             "activitySubtitle": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Build Successful' : 'Build Failed'}",             "activityImage": "https://your-company-logo-url.com/logo.png",             "facts": [                 {"name": "Name", "value": "${JOB_NAME}"},                 {"name": "Build Number", "value": "${BUILD_NUMBER}"},                 {"name": "Status", "value": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Successful' : 'Failed'}"},                 {"name": "Commit", "value": "${gitCommit}"}             ]         }     ] }' ${teamsWebhookUrl}"""
             }
           }
       }
