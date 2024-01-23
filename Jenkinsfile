@@ -152,12 +152,12 @@ pipeline {
 }"""
                 
               //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"""
-              def payloadJson = groovy.json.JsonOutput.toJson(payload)
+              def payloadJson = groovy.json.JsonOutput.toJson(p)
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
               //bat "curl -X POST -H 'Content-Type: application/json' -d '${payloadJson}' ${teamsWebhookUrl}"
                 sh "curl -X POST  ${teamsWebhookUrl} \\\n" +
                  "--header 'Content-Type: application/json' \\\n" +
-                 "--data-raw ''${p}''"
+                 "--data-raw '${p}'"
             }
           }
       }
