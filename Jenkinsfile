@@ -42,6 +42,7 @@ pipeline {
                    sh curlCommand
                }
            }
+              }   
         stage('Notify Teams') {
           steps {
             script {
