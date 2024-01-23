@@ -2,7 +2,6 @@ pipeline {
     agent any
     stages {
         stage('Testing...'){
-                    def build_ok = true
           steps {
             try{
                 script {                       
@@ -17,6 +16,7 @@ pipeline {
                 }
             }
             catch(e) {
+                                    def build_ok = true
         build_ok = false
         echo e.toString()  
     }
