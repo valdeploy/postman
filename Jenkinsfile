@@ -1,10 +1,11 @@
 pipeline {
     agent any
     stages {
+        def build_ok = true
         stage('Testing...'){
           steps {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              script {                       
+            try{
+                script {                       
                 def tests = [:]
                 for (f in findFiles(glob: '**postman/bloomApi/*.json')) {
                   def n = "${f}".replaceAll("\\\\", " ")
@@ -15,8 +16,17 @@ pipeline {
                  }      
                 }
             }
+            catch(e) {
+        build_ok = false
+        echo e.toString()  
+    }
           }
       }
+    if(build_ok) {
+        currentBuild.result = "SUCCESS"
+    } else {
+        currentBuild.result = "FAILURE"
+    }
         stage('Notify Teams') {
           steps {
             script {
