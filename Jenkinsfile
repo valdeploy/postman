@@ -28,8 +28,7 @@ pipeline {
                        ]
                    }'
                    """
-                   // Execute the cURL command
-                   sh curlCommand
+                   bat curlCommand
                }
            }
        }
