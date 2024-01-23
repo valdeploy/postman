@@ -40,8 +40,26 @@ pipeline {
               def payloadJson = groovy.json.JsonOutput.toJson(p)
             //bat script: """curl -X POST -H 'Content-Type: application/json' -d '${payload}' ${teamsWebhookUrl}"""
             //  bat "echo '${payloadJson}' | curl -X POST -H 'Content-Type: application/json' -d @- ${teamsWebhookUrl}"
-              bat "curl -X POST -H 'Content-Type: application/json' -d '${p}' ${teamsWebhookUrl}"
-               // bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data '${payloadJson}'"
+              // bat "curl -X POST -H 'Content-Type: application/json' -d '${p}' ${teamsWebhookUrl}"
+               // bat "curl --request POST --url  ${teamsWebhookUrl} --header 'Content-Type: application/json' --data '{
+   "type":"message",
+   "attachments":[
+      {
+         "contentType":"application/vnd.microsoft.card.adaptive",
+         "contentUrl":null,
+         "content":{
+            "type":"AdaptiveCard",
+            "version":"1.2",
+            "body":[
+                {
+                "type": "TextBlock",
+                "text": "For Samples and Templates, see [https://adaptivecards.io/samples](https://adaptivecards.io/samples)"
+                }
+            ]
+         }
+      }
+   ]
+}'"
 
             }
           }
