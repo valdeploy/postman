@@ -10,7 +10,7 @@ pipeline {
             //def data1 ='{     "@type": "MessageCard",     "@context": "http://schema.org/extensions",     "summary": "Jenkins Build Notification",     "themeColor": "0072C6",     "sections": [         {             "activityTitle": "Jenkins Build Status",             "activitySubtitle": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Build Successful' : 'Build Failed'}",             "activityImage": "https://your-company-logo-url.com/logo.png",             "facts": [                 {"name": "Name", "value": "${JOB_NAME}"},                 {"name": "Build Number", "value": "${BUILD_NUMBER}"},                 {"name": "Status", "value": "${currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Successful' : 'Failed'}"},                 {"name": "Commit", "value": "${gitCommit}"}             ]         }     ] }'
             def data2 = '{"@type":"MessageCard","@context":"http://schema.org/extensions","themeColor":"0072C6","title":"Jenkins Build","text":"Alert","potentialAction":[{"@type":"OpenUri","name":"jenkins","targets":[{"os":"default","uri":"https://jenkins.asicentral.com/job/asi/job/postman-testing/job/fix52FQAA-585-Fix-Zeus-APIs-tests/23/console"}]}]}'
             def d = groovy.json.JsonOutput.toJson(data2)
-            bat "curl -X POST \"${url}\" -H 'Content-Type:application/json' -d \"${data2}\""
+            bat "curl -X POST \"${url}\" -H 'Content-Type:application/json' -d \"${d}\""
             }
           }
       }
