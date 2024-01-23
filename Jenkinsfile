@@ -8,9 +8,8 @@ pipeline {
                 for (f in findFiles(glob: '**postman/bloomApi/*.json')) {
                   def n = "${f}".replaceAll("\\\\", " ")
                   stage(n[8..13]) {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                       bat "npx newman run ${f}"    
-                      }
+                      
                     }            
                  }      
                 }
