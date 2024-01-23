@@ -22,6 +22,7 @@ pipeline {
                     }
                 }
             }
+        }
         stage('Notify Teams') {
           steps {
             script {
