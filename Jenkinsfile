@@ -1,6 +1,27 @@
 pipeline {
     agent any
     stages {
+        stage('Iterate Subfolders and Run Newman with Allure') {
+            steps {
+                script {
+                    dir('postman') {
+                        def subfolders = findFiles(glob: '**postman/bloomApi/*.json')
+                        async.parallel(subfolders.collectEntries {
+                            ["${it.name}" : {
+                                stage("${it.name}") {
+                                    dir(it.name) {
+                                        // Generate Allure results for Newman run
+                                        bat 'newman run test.postman_collection.json -e env.json --reporters cli,allure'
+
+                                        // Move Allure results to a common directory
+                                        bat 'mv allure-results/* ../allure-results-combined'
+                                    }
+                                }
+                            }]
+                        })
+                    }
+                }
+            }
         stage('Notify Teams') {
           steps {
             script {
