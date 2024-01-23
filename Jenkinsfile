@@ -1,28 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage('Iterate Subfolders and Run Newman with Allure') {
-            steps {
-                script {
-                    dir('postman') {
-                        def subfolders = findFiles(glob: '**postman/bloomApi/*.json')
-                        async.parallel(subfolders.collectEntries {
-                            ["${it.name}" : {
-                                stage("${it.name}") {
-                                    dir(it.name) {
-                                        // Generate Allure results for Newman run
-                                        bat 'newman run test.postman_collection.json -e env.json --reporters cli,allure'
-
-                                        // Move Allure results to a common directory
-                                        bat 'mv allure-results/* ../allure-results-combined'
-                                    }
-                                }
-                            }]
-                        })
-                    }
-                }
-            }
-        }
+              stage('Testing...'){
+          steps {
+              script {                       
+                if ('all' in "${execution}") {
+                      def tests = [:]
+                      for (f in findFiles(glob: '**postman/bloomApi/*.json')) {
+                          def n = "${f}".replaceAll("\\\\", " ")
+                          stage(n[8..13]) {
+                          tests["${f}"] = {
+                                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                                      bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results"
+                                  }
+                              }
+                          }
+                      }
+                       if ('parallel'==true) {
+                      parallel tests
+                      }
+                  }
+                  if('single' in "${execution}") {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        bat "npx newman run postman/${project}API/${project}Api.postman_collection.json --reporters cli,allure --reporter-allure-export allure-results"
+                        }
+                  }
+              }
+          }
+      }
         stage('Notify Teams') {
           steps {
             script {
