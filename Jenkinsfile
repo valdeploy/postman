@@ -9,7 +9,7 @@ pipeline {
                   def n = "${f}".replaceAll("\\\\", " ")
                   stage(n[8..13]) {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                      bat "npx newman run ${f} --reporters cli,allure --reporter-allure-export allure-results       
+                      bat "npx newman run ${f}     
                       }
                     }            
                  }      
