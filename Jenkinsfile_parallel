@@ -11,6 +11,7 @@ pipeline {
                     dir('postman') {
                         def subfolders = findFiles(glob: '**postman/bloomApi/*.json')
                         bat 'npm install async'
+                        const async = require('async')
                         async.parallel(subfolders.collectEntries {
                             ["${it.name}" : {
                                 stage("${it.name}") {
